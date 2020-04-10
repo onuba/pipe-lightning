@@ -3,7 +3,7 @@ Automated transformations pipelines v0.0.1-SNAPSHOT
 
 ## Introduction
 
-pipe-lightning is a dynamic nodejs framework for build a run pipelines to make transformations over several kinds of resources.
+pipe-lightning is a dynamic nodejs framework for build and run pipelines to make transformations over several kinds of resources.
 
 The main goal of pipe-lightning is to automate mechanical and repeated task to center your effort in what matters: quality, test and develop your system without spend your time in bored task.
 
