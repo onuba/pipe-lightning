@@ -1,0 +1,18 @@
+{
+  "name": "pipe-lightning",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "automated transformations pipelines",
+  "main": "init.js",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "xml-js": "^1.6.11"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "https://github.com/onuba <fhsuarez@gmail.com>",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "jest": "^25.2.6"
+  }
+}
