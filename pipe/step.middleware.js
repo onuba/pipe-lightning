@@ -34,11 +34,6 @@ const step_helper = {
 
 const stepMiddleware = (step) => ({
 
-    /**
-     * Deserializes JSON
-     * @param {Object} message
-     * @param {Function} next
-     */
     run: function (context, next, error) {
       let start = Date.now()
       console.log(`Running step ${step.name}`)
@@ -48,6 +43,8 @@ const stepMiddleware = (step) => ({
         Object.keys(step.run).forEach(k => tasks.push(step_helper.toPromise({ name: k, method: step.run[k] }, context)));
       }
 
+      // TODO manage values
+      // TODO when a promises crashes, stop pending tasks.
       Promise.all(tasks).then(values => {
           let end = Date.now();
           console.log(`Step ${step.name} completed in ${end - start} mls!`)
