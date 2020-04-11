@@ -15,21 +15,33 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
-var convert = require('xml-js');
+const _ = require('lodash');
 
-util = {
+const utils = {
 
-    fromXML(data, toObject) {
+    addToObject(object, path, initValue, value) {
 
-        var json = convert.xml2json(data, {compact: true, spaces: 4});
-        return toObject ? JSON.parse(json) : json;
-    },
+        _.get(object, path) || _.set(object, path, initValue);
+        
+        if (_.isArray(value) && _.isArray(_.get(object, path))) {
+            
+            _.set(object, path, _.get(object, path).concat(value));
 
-    fromJson(data) {
-
-        var xml = convert.json2xml(data, {compact: true, spaces: 4});
-        return xml;
+        } else if (_.isArray(_.get(object, path))) {
+            _.get(object, path).push(value);
+            
+        } else {
+            _.set(object, path, _.mergeWith(_.get(object, path), value, (objValue, srcValue) => {
+                //console.log(`objValue: ${objValue} srcValue: ${srcValue}`)
+                if (_.isArray(objValue)) {
+                    return objValue.concat(srcValue);
+                }
+                if (_.isObject(objValue)) {
+                    return objValue.push(srcValue);
+                }
+            }));
+        }
     }
 }
 
-module.exports = util
+module.exports = utils;

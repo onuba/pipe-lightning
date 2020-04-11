@@ -15,52 +15,27 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
-class PipeManager {
+const pipe_launcher = require('../../pipe/pipe.launcher'),
+    initialice_step = require('./steps/initialize.step'),
+    parseDb_step = require('./steps/parseDb.step'),
+    finish_step = require('./steps/finish.step')
 
-    constructor() {
-        this.context = {};
-        this.steps = [];
-    }
+// Example pipe
+var pipe = {
+    conf: {
+        name: "test_pipe",
+        description: "This is a awesome test pipe",
+        author: "onuba",
+        debug: true,
+        parallel_steps: false
+    },
 
-    context() {
-        return this.context;
-    }
-
-    use(stepFunc) {
-
-        this.steps.push(stepFunc)
-    }
-
-    runStages(cb) {
-
-        this.steps[0].run(this.context, 
-            () => {
-                this.next(cb);        
-            },
-            (error) => {
-                this.error(error);
-            });
-    }
-
-    next(cb) {
-
-        if (this.steps.length > 1) {
-            this.steps = this.steps.slice(1);
-            this.runStages(cb);
-        } else {
-            this.done(cb);
-        }
-    }
-
-    error(err) {
-        console.error(err);
-        this.done();
-    }
-
-    done(cb) {
-        console.log('Done!');
-        cb && cb(); 
-    }
+    steps: [
+        parseDb_step,
+        initialice_step,
+        parseDb_step,
+        finish_step
+    ]
 }
 
-module.exports = PipeManager
+pipe_launcher(pipe);

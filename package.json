@@ -5,6 +5,7 @@
   "main": "init.js",
   "dependencies": {
     "gulp": "^4.0.2",
+    "lodash": "^4.17.15",
     "xml-js": "^1.6.11"
   },
   "scripts": {
