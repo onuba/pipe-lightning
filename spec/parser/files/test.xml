@@ -1,0 +1,12 @@
+<xml>
+    <tag1 property1="a"></tag1>
+
+    <tag1 property1="b"></tag1>
+
+    <tag2 property1="c" property2="d">
+        <tag1 property1="e"></tag1>
+        <tag3></tag3>
+    </tag2>
+
+    <tag1 property1="f"></tag1>
+</xml>

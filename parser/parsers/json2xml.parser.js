@@ -17,19 +17,22 @@
  */
 var convert = require('xml-js');
 
-util = {
+json2xml = {
 
-    fromXML(data, toObject) {
+    doAction(options) {
 
-        var json = convert.xml2json(data, {compact: true, spaces: 4});
-        return toObject ? JSON.parse(json) : json;
-    },
+        return new Promise((resolve, reject) => {
 
-    fromJson(data) {
-
-        var xml = convert.json2xml(data, {compact: true, spaces: 4});
-        return xml;
+            try {
+                const compact = options.compact || true
+                const spaces = options.spaces || 4
+                
+                resolve(convert.json2xml(options.data, {compact: compact, spaces: spaces}));
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 }
 
-module.exports = util
+module.exports = json2xml

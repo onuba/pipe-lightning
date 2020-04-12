@@ -1,0 +1,33 @@
+{
+    "xml": {
+        "tag1": [
+            {
+                "_attributes": {
+                    "property1": "a"
+                }
+            },
+            {
+                "_attributes": {
+                    "property1": "b"
+                }
+            },
+            {
+                "_attributes": {
+                    "property1": "f"
+                }
+            }
+        ],
+        "tag2": {
+            "_attributes": {
+                "property1": "c",
+                "property2": "d"
+            },
+            "tag1": {
+                "_attributes": {
+                    "property1": "e"
+                }
+            },
+            "tag3": {}
+        }
+    }
+}
