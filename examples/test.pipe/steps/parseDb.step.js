@@ -3,7 +3,7 @@ module.exports = {
     name: "parseDb",
     conf: {},
     run: {
-        didHello(context) {
+        didHello(context, resolve, reject) {
             
             console.log(context.hello);
             if (context.hello === 1) {
@@ -11,6 +11,8 @@ module.exports = {
             } else {
                 console.log('I forgot to do a hello!');
             }
+
+            resolve();
         }
     }
 }

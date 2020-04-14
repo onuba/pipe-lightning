@@ -15,25 +15,24 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
-var convert = require('xml-js'),
-    isBoolean = require('lodash/isBoolean')
+const pipe_launcher = require('../../pipe/pipe.launcher'),
+    initialice_step = require('./steps/init.step'),
+    getPatterns_step = require('./steps/get.patterns.step')
 
-json2xml = {
+// Example pipe
+var pipe = {
+    conf: {
+        name: "replace_pipe",
+        description: "This pipe will perform some replaces in files",
+        author: "onuba",
+        debug: true,
+        parallel_steps: false
+    },
 
-    doAction(options) {
-
-        return new Promise((resolve, reject) => {
-
-            try {
-                const compact = isBoolean(options.compact) ? options.compact : true
-                const spaces = options.spaces || 4
-                
-                resolve(convert.json2xml(options.data, {compact: compact, spaces: spaces}));
-            } catch (err) {
-                reject(err);
-            }
-        });
-    }
+    steps: [
+        initialice_step,
+        getPatterns_step
+    ]
 }
 
-module.exports = json2xml
+pipe_launcher(pipe);

@@ -15,22 +15,37 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
-var convert = require('xml-js'),
-    isBoolean = require('lodash/isBoolean')
+const { Parser } = require('sql-ddl-to-json-schema');
 
-xml2json = {
+ddl2json = {
 
     doAction(options) {
 
         return new Promise((resolve, reject) => {
 
             try {
-                
-                const compact = isBoolean(options.compact) ? options.compact : true
-                const spaces = options.spaces || 4
 
-                var json = convert.xml2json(options.data, { compact: compact, spaces: spaces });
-                resolve(options.toObject ? JSON.parse(json) : json);
+                const dbType = options.dbType || 'mysql';
+
+                const parser = new Parser(dbType);
+
+                console.log('a')
+                const parsedJsonFormat = parser.feed(options.data).results;
+
+                const compactJsonTablesArray = parser.toCompactJson(parsedJsonFormat);
+                console.log('b')
+
+                result = {
+                    jsonSchema: '',
+                    compactJson: compactJsonTablesArray
+                }
+                
+                if (options.jsonSchema) {
+                    result.jsonSchema = parser.toJsonSchemaArray(options, compactJsonTablesArray);
+                }
+                
+                resolve(result);
+
             } catch (err) {
                 reject(err);
             }
@@ -38,4 +53,4 @@ xml2json = {
     }
 }
 
-module.exports = xml2json
+module.exports = ddl2json

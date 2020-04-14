@@ -23,7 +23,9 @@ const step_helper = {
 
       try {
         console.log(`Running step task ${task.name}`)
-        resolve(task.method(context));
+        task.method(context, 
+          (result) => resolve(result),
+          (error) => reject(error));
 
       } catch (err) {
         reject(err);

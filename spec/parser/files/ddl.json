@@ -1,0 +1,546 @@
+{
+    "jsonSchema": "",
+    "compactJson": [
+      {
+        "name": "abonos",
+        "columns": [
+          {
+            "name": "AB_ID",
+            "type": {
+              "datatype": "int",
+              "width": 11
+            },
+            "options": {
+              "nullable": false,
+              "autoincrement": true,
+              "comment": "IDENTIFICADOR."
+            }
+          },
+          {
+            "name": "AB_ID_CONS",
+            "type": {
+              "datatype": "varchar",
+              "length": 14
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "ID CONSULTOR"
+            }
+          },
+          {
+            "name": "AB_ID_COORD",
+            "type": {
+              "datatype": "varchar",
+              "length": 14
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "ID COORDINADOR"
+            }
+          },
+          {
+            "name": "AB_FECHA_CREACION",
+            "type": {
+              "datatype": "date",
+              "fractional": 0
+            },
+            "options": {
+              "nullable": false
+            }
+          },
+          {
+            "name": "AB_PRECIO_SIN_IVA_18",
+            "type": {
+              "datatype": "decimal",
+              "digits": 9,
+              "decimals": 2
+            },
+            "options": {
+              "nullable": false,
+              "comment": "PRECIO SIN IVA 18%"
+            }
+          },
+          {
+            "name": "AB_TOTAL_IVA_18",
+            "type": {
+              "datatype": "decimal",
+              "digits": 9,
+              "decimals": 2
+            },
+            "options": {
+              "nullable": false,
+              "comment": "TOTAL CON IVA 18%"
+            }
+          },
+          {
+            "name": "AB_PRECIO_TOTAL",
+            "type": {
+              "datatype": "decimal",
+              "digits": 9,
+              "decimals": 2
+            },
+            "options": {
+              "nullable": false,
+              "comment": "PRECIO FINAL"
+            }
+          }
+        ],
+        "primaryKey": {
+          "columns": [
+            {
+              "column": "AB_ID"
+            }
+          ]
+        },
+        "options": {
+          "autoincrement": 1,
+          "charset": "utf8",
+          "comment": "TABLA QUE CONTIENE LOS ABONOS DEL SISTEMA",
+          "engine": "InnoDB"
+        }
+      },
+      {
+        "name": "usuario_plataforma",
+        "columns": [
+          {
+            "name": "UP_NIF",
+            "type": {
+              "datatype": "varchar",
+              "length": 14
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "IDENTIFICADOR."
+            }
+          },
+          {
+            "name": "UP_PASS",
+            "type": {
+              "datatype": "varchar",
+              "length": 60
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "CONTRASEÃƒâ€˜A DEL DISTRIBUIDOR"
+            }
+          },
+          {
+            "name": "UP_NOMBRE",
+            "type": {
+              "datatype": "varchar",
+              "length": 200
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "NOMBRE DEL DISTRIBUIDOR"
+            }
+          },
+          {
+            "name": "UP_PER_CONTACTO",
+            "type": {
+              "datatype": "varchar",
+              "length": 65
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false
+            }
+          },
+          {
+            "name": "UP_TELEFONO",
+            "type": {
+              "datatype": "varchar",
+              "length": 15
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false
+            }
+          },
+          {
+            "name": "UP_EMAIL",
+            "type": {
+              "datatype": "varchar",
+              "length": 70
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false
+            }
+          },
+          {
+            "name": "UP_ID_ROL",
+            "type": {
+              "datatype": "int",
+              "width": 11
+            },
+            "options": {
+              "nullable": false,
+              "comment": "ROL"
+            }
+          },
+          {
+            "name": "UP_NIF_RESP",
+            "type": {
+              "datatype": "varchar",
+              "length": 9
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": true,
+              "default": null
+            }
+          },
+          {
+            "name": "UP_DIRECCION",
+            "type": {
+              "datatype": "varchar",
+              "length": 100
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "DIRECCION"
+            }
+          },
+          {
+            "name": "UP_ID_PAIS",
+            "type": {
+              "datatype": "varchar",
+              "length": 2
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "PAIS"
+            }
+          },
+          {
+            "name": "UP_POBLACION",
+            "type": {
+              "datatype": "varchar",
+              "length": 50
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "POBLACION"
+            }
+          },
+          {
+            "name": "UP_ID_PROVINCIA",
+            "type": {
+              "datatype": "varchar",
+              "length": 60
+            },
+            "options": {
+              "nullable": false,
+              "comment": "PROVINCIA"
+            }
+          },
+          {
+            "name": "UP_COD_POSTAL",
+            "type": {
+              "datatype": "varchar",
+              "length": 5
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "CODIGO POSTAL"
+            }
+          },
+          {
+            "name": "UP_MOVIL",
+            "type": {
+              "datatype": "varchar",
+              "length": 15
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": true,
+              "default": null
+            }
+          },
+          {
+            "name": "UP_FAX",
+            "type": {
+              "datatype": "varchar",
+              "length": 15
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": true,
+              "default": null
+            }
+          },
+          {
+            "name": "UP_LIQUID_PORC",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "default": "0",
+              "comment": "PORCENTAJE PARA LIQUIDACION"
+            }
+          },
+          {
+            "name": "UP_WC_ORDER",
+            "type": {
+              "datatype": "varchar",
+              "length": 100
+            },
+            "options": {
+              "nullable": true,
+              "default": null
+            }
+          },
+          {
+            "name": "ES_LEXMASTER",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "default": "0"
+            }
+          },
+          {
+            "name": "TOKEN_TARJETA",
+            "type": {
+              "datatype": "varchar",
+              "length": 100
+            },
+            "options": {
+              "nullable": true,
+              "default": null
+            }
+          },
+          {
+            "name": "CADUCIDAD_TARJETA",
+            "type": {
+              "datatype": "varchar",
+              "length": 4
+            },
+            "options": {
+              "nullable": true,
+              "default": null
+            }
+          }
+        ],
+        "primaryKey": {
+          "columns": [
+            {
+              "column": "UP_NIF"
+            }
+          ]
+        },
+        "indexes": [
+          {
+            "columns": [
+              {
+                "column": "UP_NIF_RESP",
+                "length": 9
+              }
+            ],
+            "name": "FK_UP_UP"
+          },
+          {
+            "columns": [
+              {
+                "column": "UP_ID_ROL"
+              }
+            ],
+            "name": "FK_UP_ROL"
+          },
+          {
+            "columns": [
+              {
+                "column": "UP_ID_PAIS",
+                "length": 2
+              }
+            ],
+            "name": "FK_UP_PAIS"
+          }
+        ],
+        "options": {
+          "charset": "utf8",
+          "comment": "TABLA QUE CONTIENE A LOS USUARIOS DEL SISTEMA",
+          "engine": "InnoDB"
+        }
+      },
+      {
+        "name": "roles",
+        "columns": [
+          {
+            "name": "CODIGO",
+            "type": {
+              "datatype": "int",
+              "width": 11
+            },
+            "options": {
+              "nullable": false,
+              "comment": "IDENTIFICADOR"
+            }
+          },
+          {
+            "name": "DESCRIPCION",
+            "type": {
+              "datatype": "varchar",
+              "length": 50
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "DESCRIPCION"
+            }
+          }
+        ],
+        "primaryKey": {
+          "columns": [
+            {
+              "column": "CODIGO"
+            }
+          ]
+        },
+        "options": {
+          "charset": "utf8",
+          "comment": "CONTIENE LOS ROLESH ",
+          "engine": "InnoDB"
+        }
+      },
+      {
+        "name": "pais",
+        "columns": [
+          {
+            "name": "CODIGO",
+            "type": {
+              "datatype": "varchar",
+              "length": 2
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "IDENTIFICADOR DE PAIS"
+            }
+          },
+          {
+            "name": "DESCRIPCION",
+            "type": {
+              "datatype": "varchar",
+              "length": 60
+            },
+            "options": {
+              "charset": "utf8",
+              "collation": "utf8_spanish_ci",
+              "nullable": false,
+              "comment": "DESCRIPCION DEL PAIS"
+            }
+          },
+          {
+            "name": "IND_RESPONSABLE",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "comment": "INDICADOR DE RESPONSABLE"
+            }
+          },
+          {
+            "name": "IND_ACCESO",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "comment": "INDICADOR DE ACCESO"
+            }
+          },
+          {
+            "name": "IND_ENCARGADO",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "comment": "INDICADOR DE ENCARGADO"
+            }
+          },
+          {
+            "name": "IND_TRANS_INT",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "comment": "INDICADOR DE TRANSFERENCIAS INTERNACIONALES"
+            }
+          },
+          {
+            "name": "IND_DECLARANTE",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "comment": "INDICADOR DE DECLARANTE"
+            }
+          },
+          {
+            "name": "IND_PRIVACY_SHIELD",
+            "type": {
+              "datatype": "int",
+              "width": 1
+            },
+            "options": {
+              "nullable": false,
+              "default": "0"
+            }
+          }
+        ],
+        "primaryKey": {
+          "columns": [
+            {
+              "column": "CODIGO"
+            }
+          ]
+        },
+        "options": {
+          "charset": "utf8",
+          "comment": "TABLA QUE CONTIENE A LOS DISTRIBUIDORES ASOCIADOS AL SISTEMA",
+          "engine": "InnoDB"
+        }
+      }
+    ]
+  }

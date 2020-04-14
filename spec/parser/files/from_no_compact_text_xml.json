@@ -1,0 +1,52 @@
+{
+    "elements": [
+        {
+            "type": "element",
+            "name": "xml",
+            "elements": [
+                {
+                    "type": "element",
+                    "name": "tag1",
+                    "attributes": {
+                        "property1": "a"
+                    }
+                },
+                {
+                    "type": "element",
+                    "name": "tag1",
+                    "attributes": {
+                        "property1": "b"
+                    }
+                },
+                {
+                    "type": "element",
+                    "name": "tag2",
+                    "attributes": {
+                        "property1": "c",
+                        "property2": "d"
+                    },
+                    "elements": [
+                        {
+                            "type": "element",
+                            "name": "tag1",
+                            "attributes": {
+                                "property1": "e"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "tag3"
+                        }
+                    ]
+                },
+                {
+                    "type": "element",
+                    "name": "tag1",
+                    "attributes": {
+                        "property1": "f"
+                    }
+                }
+            ]
+        }
+    ]
+}

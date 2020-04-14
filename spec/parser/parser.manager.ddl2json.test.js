@@ -18,15 +18,61 @@
 const parserManager = require('../../parser/parser.manager'),
     fs = require('fs');
 
-var xmlFile;
+var ddlFile;
+var ddlFileOneTable;
 
-beforeAll(() => {
-    xmlFile = fs.readFileSync('./spec/parser/files/test.xml');
-});
+/*beforeAll(() => {
+    ddlFile = fs.readFileSync('./spec/parser/files/mysql.dll.sql').toString();
+    ddlFileOneTable = fs.readFileSync('./spec/parser/files/mysql.dll.one.table.sql').toString();
+});*/
 
-test('xml2json with not exist file', (done) => {
+//parserManager.parseFrom('ddl2json', { data: fs.readFileSync('./spec/parser/files/mysql.dll.one.table.sql').toString() },
+parserManager.parseFrom('ddl2json', { data: fs.readFileSync('./files/mysql.dll.one.table.sql').toString() },
+        (data) => {
 
-    parserManager.parseFrom('xml2json', {},
+            try {
+                //expect(data).toBeDefined();
+                console.log(JSON.stringify(data, null, 2))
+                /*expect(typeof data).toBe('string');
+
+                const obj = JSON.parse(data);
+                expect(obj).toBeDefined();
+
+                expect(obj.xml).toBeDefined();
+                expect(obj.xml.tag1).toBeDefined();
+                expect(obj.xml.tag1).toBeInstanceOf(Array);
+                expect(obj.xml.tag1.length).toBe(3);
+
+                expect(obj.xml.tag2).toBeDefined();
+                expect(obj.xml.tag2).toBeInstanceOf(Object);
+                
+                expect(obj.xml.tag2._attributes).toBeDefined();
+                expect(obj.xml.tag2._attributes).toBeInstanceOf(Object);
+                expect(obj.xml.tag2._attributes.property1).toBe('c');
+                expect(obj.xml.tag2._attributes.property2).toBe('d');
+
+                expect(obj.xml.tag2.tag1).toBeDefined();
+                expect(obj.xml.tag2.tag1).toBeInstanceOf(Object);
+                expect(obj.xml.tag2.tag1._attributes).toBeDefined();
+                expect(obj.xml.tag2.tag1._attributes).toBeInstanceOf(Object);
+                expect(obj.xml.tag2.tag1._attributes.property1).toBe('e');
+
+                expect(obj.xml.tag2.tag3).toBeDefined();
+                expect(obj.xml.tag2.tag3).toBeInstanceOf(Object);
+
+                done();*/
+            } catch (error) {
+                done(error);
+            }
+        },
+        (error) => {
+            console.error(error);
+        }
+    );
+
+/*test('ddl2json with not exist file', (done) => {
+
+    parserManager.parseFrom('ddl2json', {},
         (data) => {
         },
         (error) => {
@@ -37,13 +83,14 @@ test('xml2json with not exist file', (done) => {
     );
 });
 
-test('xml2json with valid file as compact', (done) => {
+test('ddl2json with valid file as compact', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: true },
+    parserManager.parseFrom('ddl2json', { data: ddlFileOneTable },
         (data) => {
 
             try {
                 expect(data).toBeDefined();
+                console.log(data)
                 expect(typeof data).toBe('string');
 
                 const obj = JSON.parse(data);
@@ -79,11 +126,11 @@ test('xml2json with valid file as compact', (done) => {
         (error) => {
         }
     );
-});
+}, 100000);
 
-test('xml2json with valid file as object', (done) => {
+test('ddl2json with valid file as object', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, toObject: true, compact: true },
+    parserManager.parseFrom('ddl2json', { data: xmlFile, toObject: true, compact: true },
         (data) => {
 
             try {
@@ -122,9 +169,9 @@ test('xml2json with valid file as object', (done) => {
     );
 });
 
-test('xml2json with valid file as no compact', (done) => {
+test('ddl2json with valid file as no compact', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: false },
+    parserManager.parseFrom('ddl2json', { data: xmlFile, compact: false },
         (data) => {
 
             try {
@@ -197,9 +244,9 @@ test('xml2json with valid file as no compact', (done) => {
     );
 });
 
-test('xml2json with valid file as no compact as object', (done) => {
+test('ddl2json with valid file as no compact as object', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: false, toObject: true },
+    parserManager.parseFrom('ddl2json', { data: xmlFile, compact: false, toObject: true },
         (data) => {
 
             try {
@@ -267,4 +314,4 @@ test('xml2json with valid file as no compact as object', (done) => {
         (error) => {
         }
     );
-});
+});*/
