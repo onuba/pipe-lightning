@@ -14,7 +14,7 @@ More features are coming...
 
 ## Used Libraries
 
-Pipe-lightning integrates with some awesome technologies and frameworks for general purposes. pipe-lightning has components to an easy use of those libraries, although you can use it directly or use you preferred technology installing it globally with npm, or use yoy awesome code.
+Pipe-lightning integrates with some awesome technologies and frameworks for general purposes. Pipe-lightning has components to an easy use of those libraries, although you can use it directly or use you preferred technology installing it globally with npm, or use your awesome code.
 
 The following libraries are integrated now with pipe-lightning:
 
