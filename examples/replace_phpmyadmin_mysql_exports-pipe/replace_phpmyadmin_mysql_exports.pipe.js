@@ -17,13 +17,19 @@
  */
 const pipe_launcher = require('../../pipe/pipe.launcher'),
     initialice_step = require('./steps/init.step'),
-    getPatterns_step = require('./steps/get.patterns.step')
+    getReplacementPatterns_step = require('./steps/get.replacement.patterns.step'),
+    fkReplace_step = require('./steps/fk.replace.setp'),
+    writeFile_step = require('./steps/write_new_file.step')
 
 // Example pipe
 var pipe = {
     conf: {
         name: "replace_pipe",
-        description: "This pipe will perform some replaces in files",
+        description: `This pipe will perform some replaces in mysql files.
+
+        The phpmyadmin exports Foreigng Keys as ALTER TABLES at the end of the file, 
+        
+        The sql-ddl-to-json-schema library needs the foreign key definition to be in create table sentence.`,
         author: "onuba",
         debug: true,
         parallel_steps: false
@@ -31,7 +37,9 @@ var pipe = {
 
     steps: [
         initialice_step,
-        getPatterns_step
+        getReplacementPatterns_step,
+        fkReplace_step,
+        writeFile_step
     ]
 }
 

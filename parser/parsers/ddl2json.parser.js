@@ -29,12 +29,10 @@ ddl2json = {
 
                 const parser = new Parser(dbType);
 
-                console.log('a')
                 const parsedJsonFormat = parser.feed(options.data).results;
 
                 const compactJsonTablesArray = parser.toCompactJson(parsedJsonFormat);
-                console.log('b')
-
+                
                 result = {
                     jsonSchema: '',
                     compactJson: compactJsonTablesArray

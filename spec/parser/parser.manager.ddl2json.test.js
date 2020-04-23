@@ -19,58 +19,12 @@ const parserManager = require('../../parser/parser.manager'),
     fs = require('fs');
 
 var ddlFile;
-var ddlFileOneTable;
 
-/*beforeAll(() => {
-    ddlFile = fs.readFileSync('./spec/parser/files/mysql.dll.sql').toString();
-    ddlFileOneTable = fs.readFileSync('./spec/parser/files/mysql.dll.one.table.sql').toString();
-});*/
+beforeAll(() => {
+    ddlFile = fs.readFileSync('./spec/parser/files/replaced_mysql.ddl.sql').toString();
+});
 
-//parserManager.parseFrom('ddl2json', { data: fs.readFileSync('./spec/parser/files/mysql.dll.one.table.sql').toString() },
-parserManager.parseFrom('ddl2json', { data: fs.readFileSync('./files/mysql.dll.one.table.sql').toString() },
-        (data) => {
-
-            try {
-                //expect(data).toBeDefined();
-                console.log(JSON.stringify(data, null, 2))
-                /*expect(typeof data).toBe('string');
-
-                const obj = JSON.parse(data);
-                expect(obj).toBeDefined();
-
-                expect(obj.xml).toBeDefined();
-                expect(obj.xml.tag1).toBeDefined();
-                expect(obj.xml.tag1).toBeInstanceOf(Array);
-                expect(obj.xml.tag1.length).toBe(3);
-
-                expect(obj.xml.tag2).toBeDefined();
-                expect(obj.xml.tag2).toBeInstanceOf(Object);
-                
-                expect(obj.xml.tag2._attributes).toBeDefined();
-                expect(obj.xml.tag2._attributes).toBeInstanceOf(Object);
-                expect(obj.xml.tag2._attributes.property1).toBe('c');
-                expect(obj.xml.tag2._attributes.property2).toBe('d');
-
-                expect(obj.xml.tag2.tag1).toBeDefined();
-                expect(obj.xml.tag2.tag1).toBeInstanceOf(Object);
-                expect(obj.xml.tag2.tag1._attributes).toBeDefined();
-                expect(obj.xml.tag2.tag1._attributes).toBeInstanceOf(Object);
-                expect(obj.xml.tag2.tag1._attributes.property1).toBe('e');
-
-                expect(obj.xml.tag2.tag3).toBeDefined();
-                expect(obj.xml.tag2.tag3).toBeInstanceOf(Object);
-
-                done();*/
-            } catch (error) {
-                done(error);
-            }
-        },
-        (error) => {
-            console.error(error);
-        }
-    );
-
-/*test('ddl2json with not exist file', (done) => {
+test('ddl2json with not exist file', (done) => {
 
     parserManager.parseFrom('ddl2json', {},
         (data) => {
@@ -83,17 +37,17 @@ parserManager.parseFrom('ddl2json', { data: fs.readFileSync('./files/mysql.dll.o
     );
 });
 
-test('ddl2json with valid file as compact', (done) => {
+test('ddl2json with valid file as compactJson', (done) => {
 
-    parserManager.parseFrom('ddl2json', { data: ddlFileOneTable },
+    parserManager.parseFrom('ddl2json', { data: ddlFile },
         (data) => {
 
             try {
                 expect(data).toBeDefined();
                 console.log(data)
-                expect(typeof data).toBe('string');
+                expect(typeof data).toBe('object');
 
-                const obj = JSON.parse(data);
+                /*const obj = JSON.parse(data);
                 expect(obj).toBeDefined();
 
                 expect(obj.xml).toBeDefined();
@@ -116,7 +70,7 @@ test('ddl2json with valid file as compact', (done) => {
                 expect(obj.xml.tag2.tag1._attributes.property1).toBe('e');
 
                 expect(obj.xml.tag2.tag3).toBeDefined();
-                expect(obj.xml.tag2.tag3).toBeInstanceOf(Object);
+                expect(obj.xml.tag2.tag3).toBeInstanceOf(Object);*/
 
                 done();
             } catch (error) {
@@ -126,9 +80,9 @@ test('ddl2json with valid file as compact', (done) => {
         (error) => {
         }
     );
-}, 100000);
+});
 
-test('ddl2json with valid file as object', (done) => {
+/*test('ddl2json with valid file as object', (done) => {
 
     parserManager.parseFrom('ddl2json', { data: xmlFile, toObject: true, compact: true },
         (data) => {

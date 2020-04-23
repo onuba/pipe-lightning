@@ -22,4 +22,5 @@ The following libraries are integrated now with pipe-lightning:
 - [lodash](https://lodash.com/): A modern JavaScript utility library delivering modularity, performance & extras.
 - [sql-ddl-to-json-schema](https://www.npmjs.com/package/sql-ddl-to-json-schema): Transforms SQL DDL statements into JSON format (JSON Schema and a compact format). 
 - [xml-js](https://www.npmjs.com/package/xml-js): Convert XML text to Javascript object / JSON text (and vice versa).
-- [moo](https://www.npmjs.com/package/moo): Moo is a highly-optimised tokenizer/lexer generator.  
+- [moo](https://www.npmjs.com/package/moo): Moo is a highly-optimised tokenizer/lexer generator.
+- [ejs](https://ejs.co/): EJS is a simple templating language.  

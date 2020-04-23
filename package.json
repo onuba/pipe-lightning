@@ -4,6 +4,7 @@
   "description": "automated transformations pipelines",
   "main": "init.js",
   "dependencies": {
+    "ejs": "^3.0.2",
     "gulp": "^4.0.2",
     "lodash": "^4.17.15",
     "sql-ddl-to-json-schema": "^4.0.1",
