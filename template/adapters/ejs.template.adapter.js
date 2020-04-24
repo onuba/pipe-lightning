@@ -15,23 +15,31 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
-const parser = {
 
-    parseFrom(strategy, options, complete, error) {
+// defined as a singleton but the factory will create objects
+const ejsAdapter = {
 
-        try {
-            const parser = require(`./parsers/${strategy}.parser`)
-            console.log(`Launching parser ${strategy}...`)
+    data: {},
 
-            parser.doAction(options).then((resolve) => {
-                console.log(`Parser ${strategy} executed ok!`)
-                complete(resolve);
-            }).catch((err) => {
-                error(err)
-            });
-        } catch (err) {
-            throw err;
-        }
+    strTemplateToString(strTemplate) {
+        console.log(this.data)
+        console.log(strTemplate)
+    },
+
+    strTemplateToFile(strTemplate, outFilePath) {
+        console.log(this.data)
+        console.log(strTemplate + ' ' + outFilePath)
+    },
+
+    templateToString(templateName) {
+        console.log(this.data)
+        console.log(templateName)
+    },
+
+    templateToFile(templateName, outFilePath) {
+        console.log(this.data)
+        console.log(templateName + ' ' + outFilePath)
     }
 }
-module.exports = parser;
+
+module.exports = ejsAdapter;
