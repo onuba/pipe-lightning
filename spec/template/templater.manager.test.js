@@ -28,7 +28,7 @@ test('test not existing template engine', () => {
 test('test existing template engine', () => {
   
     
-    var template_engine = new TemplaterManager('ejs')
+    var template_engine = new TemplaterManager('ejs', {})
 
     expect(template_engine).toBeDefined();
 
@@ -40,36 +40,99 @@ test('test existing template engine', () => {
 test('test differents objects for template engine', () => {
   
     
-    var template_engine = new TemplaterManager('ejs')
-    var template_engine2 = new TemplaterManager('ejs')
+    var template_engine = new TemplaterManager('ejs', {})
+    var template_engine2 = new TemplaterManager('ejs', {})
 
     expect(template_engine).toBeDefined();
     expect(template_engine2).toBeDefined();
 
     template_engine.data = {data1: 'aaaaa'}
-    template_engine.strTemplateToString('poc');
-
-    template_engine2.data = {data1: 'bbbbb'}
-    template_engine2.strTemplateToString('poc');
-
-    template_engine.strTemplateToString('poc2');
-});
-
-/*test('add one 0 to match', () => {
-  
-    const str = 'lorem ipsum time="100" ipsum lorem';
-
-    const regex = /time\s*=\s*"(\d+)"/g
-
-    expect(matcher.hasMatch(str, regex)).toBeTruthy();
-
-    const newStr = matcher.replaceAll(str, regex, 'time="${group_1}0"')
     
-    expect(newStr).toBeDefined();
-    expect(newStr).toBe('lorem ipsum time="1000" ipsum lorem')
+    template_engine2.data = {data1: 'bbbbb'}
+    
+    expect(template_engine.data).toBeDefined();
+    expect(template_engine.data.data1).toBe('aaaaa')
+
+    expect(template_engine2.data).toBeDefined();
+    expect(template_engine2.data.data1).toBe('bbbbb')
 });
 
-test('test right expression 2 time', () => {
+test('test string template without data', async (done) => {
+  
+    var template_engine = new TemplaterManager('ejs', {})
+    
+    expect(template_engine).toBeDefined();
+    
+    var result = await template_engine.strTemplateToString('poc');
+
+    expect(result).toBe('poc')
+
+    done()
+});
+
+test('test string template with expression without data', async (done) => {
+  
+    var template_engine = new TemplaterManager('ejs', {})
+    
+    expect(template_engine).toBeDefined();
+    
+    try {
+        await template_engine.strTemplateToString('Hello <%= poc%>');
+    } catch (err) {
+        expect(err.message.replace(/\r?\n/g, '')).toBe('ejs:1 >> 1| Hello <%= poc%>poc is not defined')
+        done()
+    }
+});
+
+test('test string template with expression without data with guard', async (done) => {
+  
+    var template_engine = new TemplaterManager('ejs', {})
+    
+    expect(template_engine).toBeDefined();
+    
+    var result = await template_engine.strTemplateToString('Hello <% if (locals.poc) { %><%= poc%><%}%>');
+    
+    expect(result).toBe('Hello ')
+    done()
+    
+});
+
+test('test string template file with expression with data', async (done) => {
+  
+    var template_engine = new TemplaterManager('ejs', {})
+    
+    expect(template_engine).toBeDefined();
+    
+    template_engine.data = {poc: 'awesome!'}
+    var result = await template_engine.strTemplateToString('Hello <%= poc %>');
+
+    expect(result).toBe('Hello awesome!')
+
+    done()
+});
+
+test('test same string template with expression with data twice', async (done) => {
+  
+    var template_engine = new TemplaterManager('ejs', {})
+    var template_engine2 = new TemplaterManager('ejs', {})
+    
+    expect(template_engine).toBeDefined();
+    expect(template_engine2).toBeDefined();
+    
+    template_engine.data = {poc: 'awesome!'}
+    template_engine2.data = {poc: 'another awesome!'}
+    var result = await template_engine.strTemplateToString('Hello <%= poc %>');
+    var result2 = await template_engine2.strTemplateToString('Hello <%= poc %>');
+    var result3 = await template_engine.strTemplateToString('Hello <%= poc %>');
+
+    expect(result).toBe('Hello awesome!')
+    expect(result2).toBe('Hello another awesome!')
+    expect(result3).toBe('Hello awesome!')
+
+    done()
+});
+
+/*test('test right expression 2 time', () => {
   
     const str = 'lorem ipsum time="100" ipsum lorem time = "1000"';
 

@@ -26,7 +26,7 @@ beforeAll(() => {
 
 test('xml2json with not exist file', (done) => {
 
-    parserManager.parseFrom('xml2json', {},
+    parserManager.parseFrom('xml2json', {}).then(
         (data) => {
         },
         (error) => {
@@ -39,7 +39,7 @@ test('xml2json with not exist file', (done) => {
 
 test('xml2json with valid file as compact', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: true },
+    parserManager.parseFrom('xml2json', { data: xmlFile, compact: true }).then(
         (data) => {
 
             try {
@@ -83,7 +83,7 @@ test('xml2json with valid file as compact', (done) => {
 
 test('xml2json with valid file as object', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, toObject: true, compact: true },
+    parserManager.parseFrom('xml2json', { data: xmlFile, toObject: true, compact: true }).then(
         (data) => {
 
             try {
@@ -124,7 +124,7 @@ test('xml2json with valid file as object', (done) => {
 
 test('xml2json with valid file as no compact', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: false },
+    parserManager.parseFrom('xml2json', { data: xmlFile, compact: false }).then(
         (data) => {
 
             try {
@@ -199,7 +199,7 @@ test('xml2json with valid file as no compact', (done) => {
 
 test('xml2json with valid file as no compact as object', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: false, toObject: true },
+    parserManager.parseFrom('xml2json', { data: xmlFile, compact: false, toObject: true }).then(
         (data) => {
 
             try {

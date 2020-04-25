@@ -17,21 +17,18 @@
  */
 const parser = {
 
-    parseFrom(strategy, options, complete, error) {
+    parseFrom(strategy, options) {
 
-        try {
-            const parser = require(`./parsers/${strategy}.parser`)
-            console.log(`Launching parser ${strategy}...`)
+        return new Promise((resolve, reject) => {
+            try {
+                const parser = require(`./parsers/${strategy}.parser`)
+                console.log(`Launching parser ${strategy}...`)
 
-            parser.doAction(options).then((resolve) => {
-                console.log(`Parser ${strategy} executed ok!`)
-                complete(resolve);
-            }).catch((err) => {
-                error(err)
-            });
-        } catch (err) {
-            throw err;
-        }
+                resolve(parser.doAction(options));
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 }
 module.exports = parser;

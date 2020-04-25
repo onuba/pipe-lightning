@@ -21,33 +21,26 @@ ddl2json = {
 
     doAction(options) {
 
-        return new Promise((resolve, reject) => {
+        try {
+            const dbType = options.dbType || 'mysql';
+            const parser = new Parser(dbType);
+            const parsedJsonFormat = parser.feed(options.data).results;
+            const compactJsonTablesArray = parser.toCompactJson(parsedJsonFormat);
 
-            try {
-
-                const dbType = options.dbType || 'mysql';
-
-                const parser = new Parser(dbType);
-
-                const parsedJsonFormat = parser.feed(options.data).results;
-
-                const compactJsonTablesArray = parser.toCompactJson(parsedJsonFormat);
-                
-                result = {
-                    jsonSchema: '',
-                    compactJson: compactJsonTablesArray
-                }
-                
-                if (options.jsonSchema) {
-                    result.jsonSchema = parser.toJsonSchemaArray(options, compactJsonTablesArray);
-                }
-                
-                resolve(result);
-
-            } catch (err) {
-                reject(err);
+            result = {
+                jsonSchema: '',
+                compactJson: compactJsonTablesArray
             }
-        });
+
+            if (options.jsonSchema) {
+                result.jsonSchema = parser.toJsonSchemaArray(options, compactJsonTablesArray);
+            }
+
+            return result;
+
+        } catch (err) {
+            throw err;
+        }
     }
 }
 

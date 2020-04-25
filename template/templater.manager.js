@@ -19,7 +19,7 @@
 // private factory
 const adapterFactory = {
 
-    getAdapterForEngine(str) {
+    getAdapterForEngine(str, options) {
         
         !str && adapterFactory.error(str);
 
@@ -27,7 +27,12 @@ const adapterFactory = {
         try {
             const adapter = require(`./adapters/${str.toLowerCase()}.template.adapter.js`);
 
-            return Object.create(adapter);
+            var adapterObj = Object.create(adapter);
+
+            adapterObj.options = options;
+            adapterObj.init();
+
+            return adapterObj;
 
         } catch (e) {
             console.error(e);
@@ -42,29 +47,60 @@ const adapterFactory = {
 
 class TemplaterManager {
 
-    constructor(templateEngine) {
+    constructor(templateEngine, options) {
         this.templateEngine = templateEngine;
-        this.adapter = adapterFactory.getAdapterForEngine(templateEngine);
+        this.options = options;
+        this.adapter = adapterFactory.getAdapterForEngine(templateEngine, options);
     }
 
     set data(data) {
         this.adapter.data = data;
     }
 
+    get data() {
+        return this.adapter.data;
+    }
+
     strTemplateToString(strTemplate) {
-        this.adapter.strTemplateToString(strTemplate)
+        
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(this.adapter.strTemplateToString(strTemplate))
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 
     strTemplateToFile(strTemplate, outFilePath) {
-        this.adapter.strTemplateToFile(strTemplate, outFilePath)
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(this.adapter.strTemplateToFile(strTemplate, outFilePath));
+            } catch (err) {
+                reject(err);
+            }
+        });
+        
     }
 
     templateToString(templateName) {
-        this.adapter.templateToString(templateName)
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(this.adapter.templateToString(templateName));
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 
     templateToFile(templateName, outFilePath) {
-        this.adapter.templateToFile(templateName, outFilePath)
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(this.adapter.templateToFile(templateName, outFilePath));
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 }
 

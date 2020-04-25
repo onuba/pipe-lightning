@@ -22,19 +22,15 @@ xml2json = {
 
     doAction(options) {
 
-        return new Promise((resolve, reject) => {
+        try {
+            const compact = isBoolean(options.compact) ? options.compact : true
+            const spaces = options.spaces || 4
 
-            try {
-                
-                const compact = isBoolean(options.compact) ? options.compact : true
-                const spaces = options.spaces || 4
-
-                var json = convert.xml2json(options.data, { compact: compact, spaces: spaces });
-                resolve(options.toObject ? JSON.parse(json) : json);
-            } catch (err) {
-                reject(err);
-            }
-        });
+            var json = convert.xml2json(options.data, { compact: compact, spaces: spaces });
+            return options.toObject ? JSON.parse(json) : json;
+        } catch (err) {
+            throw err;
+        }
     }
 }
 

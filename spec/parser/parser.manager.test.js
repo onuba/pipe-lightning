@@ -26,17 +26,18 @@ beforeAll(() => {
 
 test('not exists parser strategy', () => {
 
-    expect(() => parserManager.parseFrom('no_exists', {},
+    expect(parserManager.parseFrom('no_exists', {}).then(
         (data) => {
         },
         (error) => {
+            expect(error.message).toBe("Cannot find module './parsers/no_exists.parser' from 'parser.manager.js'")
         }
-    )).toThrowError(new Error("Cannot find module './parsers/no_exists.parser' from 'parser.manager.js'"));
+    ))
 });
 
 test('a valid strategy with not exist file', (done) => {
 
-    parserManager.parseFrom('xml2json', {},
+    parserManager.parseFrom('xml2json', {}).then(
         (data) => {
         },
         (error) => {
@@ -49,7 +50,7 @@ test('a valid strategy with not exist file', (done) => {
 
 test('a valid strategy with valid file', (done) => {
 
-    parserManager.parseFrom('xml2json', { data: xmlFile, compact: true },
+    parserManager.parseFrom('xml2json', { data: xmlFile, compact: true }).then(
         (data) => {
 
             try {

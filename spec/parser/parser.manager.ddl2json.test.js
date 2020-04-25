@@ -26,7 +26,7 @@ beforeAll(() => {
 
 test('ddl2json with not exist file', (done) => {
 
-    parserManager.parseFrom('ddl2json', {},
+    parserManager.parseFrom('ddl2json', {}).then(
         (data) => {
         },
         (error) => {
@@ -39,7 +39,7 @@ test('ddl2json with not exist file', (done) => {
 
 test('ddl2json with valid file as compactJson', (done) => {
 
-    parserManager.parseFrom('ddl2json', { data: ddlFile },
+    parserManager.parseFrom('ddl2json', { data: ddlFile }).then(
         (data) => {
 
             try {

@@ -28,7 +28,7 @@ beforeAll(() => {
 
 test('json2xml with not exist file', (done) => {
 
-    parserManager.parseFrom('json2xml', {},
+    parserManager.parseFrom('json2xml', {}).then(
         (data) => {
             try {
                 expect(data).toEqual('');
@@ -45,7 +45,7 @@ test('json2xml with not exist file', (done) => {
 
 test('json2xml with valid file as compact', (done) => {
 
-    parserManager.parseFrom('json2xml', { data: compactJson, compact: true },
+    parserManager.parseFrom('json2xml', { data: compactJson, compact: true }).then(
         (data) => {
 
             try {
@@ -74,7 +74,7 @@ test('json2xml with valid file as compact', (done) => {
 
 test('json2xml with valid file as no compact', (done) => {
 
-    parserManager.parseFrom('json2xml', { data: noCompactJson, compact: false },
+    parserManager.parseFrom('json2xml', { data: noCompactJson, compact: false }).then(
         (data) => {
 
             try {
