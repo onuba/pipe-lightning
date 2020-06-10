@@ -27,6 +27,9 @@ const ejsAdapterHelper = {
 
     loadTemplateFile(ejs, templateFile, data, options) {
 
+        // include resolution needed
+        options.filename = templateFile;
+        
         let template = ejs.compile(ejs.fileLoader(templateFile).toString(), options);
         // avoid 'user is not definied': https://stackoverflow.com/questions/31776471/ejs-template-variable-is-not-defined-on-page-load-and-errors
         return template(data)//{user: {name: 'Fran'}});

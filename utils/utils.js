@@ -41,6 +41,15 @@ const utils = {
                 }
             }));
         }
+    },
+
+    listAsStrWithSeparator(iterable, separator) {
+
+        if (!iterable) return '';
+        
+        let str = iterable.join(separator);
+
+        return str;
     }
 }
 

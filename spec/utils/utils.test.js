@@ -197,3 +197,45 @@ test('Add two object with different arrays and keys and combined it', () => {
     expect(context.input.input1.f.f_prop1).toBe('f_prop1_value');
 
 });
+
+// ---------------------- listAsStrWithSeparator
+
+test('listAsStrWithSeparator iterable as undefined ', () => {
+
+    const str = utils.listAsStrWithSeparator(undefined, '')
+
+    expect(str).toBeDefined();
+    expect(str).toBe('');
+});
+
+test('listAsStrWithSeparator iterable as empty ', () => {
+
+    const str = utils.listAsStrWithSeparator([], '')
+
+    expect(str).toBeDefined();
+    expect(str).toBe('');
+});
+
+test('listAsStrWithSeparator separator as undefined ', () => {
+
+    const str = utils.listAsStrWithSeparator([], undefined)
+
+    expect(str).toBeDefined();
+    expect(str).toBe('');
+});
+
+test('listAsStrWithSeparator iterable empty separator as whitespace ', () => {
+
+    const str = utils.listAsStrWithSeparator([], ' ')
+
+    expect(str).toBeDefined();
+    expect(str).toBe('');
+});
+
+test('listAsStrWithSeparator separator as ; whitouth last ', () => {
+
+    const str = utils.listAsStrWithSeparator(['a', 'b'], ';')
+
+    expect(str).toBeDefined();
+    expect(str).toBe('a;b');
+});
