@@ -15,6 +15,8 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
+const utils = require('../utils/utils');
+
 const step_helper = {
 
   toPromise(task, context) {
@@ -34,10 +36,11 @@ const step_helper = {
   }
 };
 
-const stepMiddleware = (step) => ({
+const stepMiddleware = (step, conf) => ({
 
     run: function (context, next, error) {
       let start = Date.now()
+      utils.addToObject(context, 'conf', {}, conf);
       console.log(`Running step ${step.name}`)
 
       tasks = []

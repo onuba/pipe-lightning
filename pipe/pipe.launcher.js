@@ -30,7 +30,7 @@ function launch(pipe) {
     if (!pipe.steps) throw new Error('No steps defined!');
 
     pipe.steps.forEach(step => {
-        pm.use(stepMiddleware.step(step));    
+        pm.use(stepMiddleware.step(step, pipe.conf));    
     });
 
     try {
