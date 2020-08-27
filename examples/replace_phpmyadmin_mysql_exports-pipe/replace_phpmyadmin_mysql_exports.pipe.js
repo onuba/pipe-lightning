@@ -32,7 +32,9 @@ var pipe = {
         The sql-ddl-to-json-schema library needs the foreign key definition to be in create table sentence.`,
         author: "onuba",
         debug: true,
-        parallel_steps: false
+        parallel_steps: false,
+        input_file: '../resources/src/lopd_20200827_estructura.sql',
+        output_file: '../resources/dest/lopd_20200827_estructura_m.sql'
     },
 
     steps: [

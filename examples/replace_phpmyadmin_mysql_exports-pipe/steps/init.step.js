@@ -6,7 +6,9 @@ module.exports = {
     run: {
         readFile(context, resolve, reject) {
             
-            fs.readFile('../resources/src/mysql.ddl.sql', (err, data) => {
+            console.log(JSON.stringify(context, '', null));
+
+            fs.readFile(context.conf.input_file, (err, data) => {
                 if (err) reject(err);
 
                 context.sqlfile = data.toString();

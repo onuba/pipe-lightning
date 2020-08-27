@@ -6,7 +6,7 @@ module.exports = {
     run: {
         writeFile(context, resolve, reject) {
             
-            fs.writeFile('../resources/dest/replaced_mysql.ddl.sql', context.sqlfile, (err) => {
+            fs.writeFile(context.conf.output_file, context.sqlfile, (err) => {
                 if (err) reject(err);
 
                 resolve();

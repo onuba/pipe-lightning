@@ -47,6 +47,7 @@ const mooGrammnarState = {
         apos: '`',
         squote: '\'',
         dot: '.',
+        set: /^SET.+/, 
         create_table: { match: /CREATE\s+TABLE(?:\s+IF\s+NOT\s+EXISTS)?\s+/, push: 'def_table'},
         alter_table: { match: /ALTER\s+TABLE\s+/, push: 'def_table'},
         add_constraint: /ADD\s+CONSTRAINT/,
@@ -61,6 +62,8 @@ const mooGrammnarState = {
         comma: ',',
         equal: '=',
         instruction_end: ';',
+        line_comment: /--.*/,  
+        special_set: /\/\*\!.*/,
         not_recognized: moo.error,
     },
     def_table: {
@@ -84,7 +87,7 @@ const step_helper = {
             return m
         })
         
-        //matchesFiltered.forEach(m => console.log(`Table: ${m.tokens[0].text}, Childs: ${JSON.stringify(m.childs, null, 2)}`));
+        matchesFiltered.forEach(m => console.log(`Table: ${m.tokens[0].text}, Childs: ${JSON.stringify(m.childs, null, 2)}`));
 
         return matchesFiltered;
     },
@@ -124,9 +127,9 @@ const step_helper = {
             return m
         })
 
-        /*replacements.forEach(m => {
+        replacements.forEach(m => {
             console.log(`Table: ${m.table}, Childs: ${JSON.stringify(m.replaces, null, 2)}`)
-        });*/
+        });
 
         return replacements;
     },
@@ -158,18 +161,19 @@ module.exports = {
             
             //var lexer = moo.compile(mooGrammnar)
             var lexer = moo.states(mooGrammnarState)
-            
+
             lexer = mooDecorator.decorate(lexer)
 
             lexer.reset(context.sqlfile)
 
             lexer.init(lexer);
 
-            //lexer.log();
+            lexer.log();
 
             var replacements = step_helper.getFkReplacements(lexer);
 
             //console.log(replacements);
+            console.log(moo)
 
             context.replacements = replacements;
 
