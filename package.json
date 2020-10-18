@@ -8,8 +8,9 @@
     "gulp": "^4.0.2",
     "lodash": "^4.17.19",
     "lru-cache": "^5.1.1",
-    "sql-ddl-to-json-schema": "^4.0.1",
-    "xml-js": "^1.6.11"
+    "sql-ddl-to-json-schema": "^4.0.4",
+    "xml-js": "^1.6.11",
+    "moo": "^0.5.1"
   },
   "scripts": {
     "test": "jest"

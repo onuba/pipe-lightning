@@ -15,6 +15,9 @@
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
+const template_functions = require('./utils/template-functions'),
+    utils = require('../utils/utils'),
+    _ = require('lodash')
 
 // private factory
 const adapterFactory = {
@@ -54,6 +57,7 @@ class TemplaterManager {
     }
 
     set data(data) {
+        utils.addToObject(data, 'data', null, template_functions);
         this.adapter.data = data;
     }
 

@@ -48,10 +48,8 @@ matcher = {
     
     match(str, regex) {
 
-        const matchs = str.matchAll(regex);
-
         // For each match, 0-> fullMatch, 1..n -> n match group
-        return Array.from(matchs);
+        return [...str.matchAll(regex)];
     },
 
     hasMatch(str, regex) {
@@ -73,6 +71,7 @@ matcher = {
         var newStr = str;
 
         const matchs = matcher.match(str, regex);
+        //console.log(matchs)
 
         matchs.forEach(m => {
 
