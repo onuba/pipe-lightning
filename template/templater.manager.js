@@ -76,10 +76,10 @@ class TemplaterManager {
         });
     }
 
-    strTemplateToFile(strTemplate, outFilePath) {
+    strTemplateToFile(strTemplate, outFilePath, outFileName) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(this.adapter.strTemplateToFile(strTemplate, outFilePath));
+                resolve(this.adapter.strTemplateToFile(strTemplate, outFilePath, outFileName));
             } catch (err) {
                 reject(err);
             }
@@ -97,10 +97,10 @@ class TemplaterManager {
         });
     }
 
-    templateToFile(templateName, outFilePath) {
+    templateToFile(templateName, outFilePath, outFileName) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(this.adapter.templateToFile(templateName, outFilePath));
+                resolve(this.adapter.templateToFile(templateName, outFilePath, outFileName));
             } catch (err) {
                 reject(err);
             }

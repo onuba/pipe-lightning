@@ -16,7 +16,8 @@
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */
 const fs = require('fs'),
-    LRU = require('lru-cache')
+    LRU = require('lru-cache'),
+    path = require('path')
 
 const ejsAdapterUtils = {
 
@@ -35,9 +36,13 @@ const ejsAdapterHelper = {
         return template(data)//{user: {name: 'Fran'}});
     },
 
-    toFile(str, path, cb) {
+    toFile(str, dir, fileName, cb) {
 
-        fs.writeFile(path, str, (err) => {
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        fs.writeFile(path.join(dir, fileName), str, (err) => {
             if (err) throw err
             cb();
         })
@@ -76,13 +81,13 @@ const ejsAdapter = {
         });
     },
 
-    strTemplateToFile(strTemplate, outFilePath) {
+    strTemplateToFile(strTemplate, outFilePath, outFileName) {
         return new Promise((resolve, reject) => {
 
             try {
                 this.data = ejsAdapterHelper.decorateData(this.data);
                 var result = this.ejs.render(strTemplate, this.data);
-                ejsAdapterHelper.toFile(result, outFilePath, () => resolve(result));
+                ejsAdapterHelper.toFile(result, outFilePath, outFileName, () => resolve(result));
             } catch (err) {
                 reject(err);
             }
@@ -103,13 +108,13 @@ const ejsAdapter = {
         });
     },
 
-    templateToFile(templateName, outFilePath) {
+    templateToFile(templateName, outFilePath, outFileName) {
         return new Promise((resolve, reject) => {
 
             try {
                 this.data = ejsAdapterHelper.decorateData(this.data);
                 var result = ejsAdapterHelper.loadTemplateFile(this.ejs, templateName, this.data, this.options)
-                ejsAdapterHelper.toFile(result, outFilePath, () => resolve(result));
+                ejsAdapterHelper.toFile(result, outFilePath, outFileName, () => resolve(result));
             } catch (err) {
                 reject(err);
             }

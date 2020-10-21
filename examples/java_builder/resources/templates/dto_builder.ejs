@@ -1,0 +1,67 @@
+package <%= data.package%>;
+
+/**
+ * <%= data.comment %>
+ *
+ * @author <%= data.author%>
+ */
+public class <%= data.__cap(data.name) %> {
+
+<% for (i = 0; i < data.extractedFields.length; i++) {
+    var c = data.extractedFields[i];
+%>  
+    /**
+     * Field <%= data.__cap(c.name)%>
+     */
+    private <%- c.type%> <%= data.__uncap(c.name)%>;
+<%}%>
+
+    private <%= data.__cap(data.name)%>(<%- data.__it(data.fields, ',\n        ')%>) { 
+
+        <% for (i = 0; i < data.extractedFields.length; i++) {
+            var c = data.extractedFields[i];
+        %>this.<%=data.__uncap(c.name)%> = <%=data.__uncap(c.name)%>;
+        <%}%>
+    }
+
+<% for (i = 0; i < data.extractedFields.length; i++) {
+    var c = data.extractedFields[i];
+%>    /**
+     * Get Field <%= data.__cap(c.name)%>
+     */
+    public <%- c.type%> get<%= data.__cap(c.name)%>() {
+        return <%= data.__uncap(c.name)%>;
+    }
+    <% if (!data.inmmutable) {%>
+    /**
+     * Set Field <%= data.__cap(c.name)%>
+     */
+    public void set<%= data.__cap(c.name)%>(<%- c.type%> <%= data.__uncap(c.name)%>) {
+        this.<%= data.__uncap(c.name)%> = <%=data.__uncap(c.name)%>;
+    }
+    <%}%>
+<%}%>
+    public static <%= data.__cap(data.name)%>Builder builder() {
+        return new <%= data.__cap(data.name)%>Builder();
+    }
+
+    public static class <%= data.__cap(data.name)%>Builder {
+
+    <% for (i = 0; i < data.extractedFields.length; i++) {
+        var c = data.extractedFields[i];
+    %>    private <%-c.type%> <%=data.__uncap(c.name)%>;
+    <%}%>
+    <% for (i = 0; i < data.extractedFields.length; i++) {
+        var c = data.extractedFields[i];
+    %>  
+        public <%= data.__cap(data.name)%>Builder <%= data.__uncap(c.name)%>(<%-c.type%> <%=data.__uncap(c.name)%>) {
+            this.<%= data.__uncap(c.name)%> = <%= data.__uncap(c.name)%>;
+            return this;
+        }
+    <%}%>
+
+        public <%= data.__cap(data.name)%> build() {
+            return new <%= data.__cap(data.name)%>(<%=data.__it(data.extractedFields.map(f => f.name), ',\n                ')%>);
+        }
+    }
+}
