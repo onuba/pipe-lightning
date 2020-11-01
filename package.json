@@ -1,6 +1,6 @@
 {
   "name": "pipe-lightning",
-  "version": "0.0.2-SNAPSHOT",
+  "version": "1.0.0",
   "description": "automated transformations pipelines",
   "main": "init.js",
   "dependencies": {

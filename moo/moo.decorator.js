@@ -21,7 +21,7 @@ const mooDecorator = {
         
                 lexer.tokens.forEach(t => console.log(t));
             },
-            
+
             lexer.get = (from, to, tokensGroup) => {
         
                 matchedList = [];

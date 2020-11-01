@@ -1,0 +1,19 @@
+const fs = require('fs')
+
+module.exports = {
+    name: "<%=data%>",
+    conf: {},
+    run: {
+        readFile(context, resolve, reject) {
+            
+            try {
+                
+                // TODO add your code here!
+                
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        }
+    }
+}

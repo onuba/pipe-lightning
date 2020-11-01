@@ -1,0 +1,25 @@
+const pipe_launcher = require('../../init').pipe_launcher,
+<% for (i = 0; i < data.steps.length; i++) {
+    var s = data.steps[i];
+%>    <%=s%>_step = require('./steps/<%=s%>.step')<%if(i < data.steps.length-1){%>,<%}%>
+<%}%>
+    
+var pipe = {
+    conf: {
+        name: "<%=data.name%>",
+        description: `<%=data.comment%>`,
+        author: "<%=data.author%>",
+        debug: true,
+        parallel_steps: false,
+        input_modelFile: './resources/src/model.json',
+        basedir: __dirname
+    },
+
+    steps: [
+    <% for (i = 0; i < data.steps.length; i++) {
+        var s = data.steps[i];
+    %>    <%=s%>_step<%if(i < data.steps.length-1){%>,<%}%>
+    <%}%>]
+}
+
+pipe_launcher(pipe);

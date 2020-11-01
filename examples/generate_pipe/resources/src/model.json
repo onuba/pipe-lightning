@@ -1,0 +1,13 @@
+[
+    {
+        "name": "migrate_sqlmodel_from_v2_to_v3",
+        "comment": "Migrate Sql DDL and DML file from version 2 to version 3",
+        "author": "onuba",
+        "steps": [
+            "read_ddl_and_dml_file",
+            "migrate_ddl_model",
+            "migrate_dml_model",
+            "generate_files"
+        ]
+    }
+]
