@@ -1,29 +1,35 @@
-const _ = require('lodash');
+const _ = require('lodash'),
+    utils = require('../../utils/utils')
 
-module.exports = {
+const helper = {
 
-    __itColon: (iterable) => {
+    __it: (iterable, separator, decorator) => {
         items = ""
         for (i = 0; i < iterable.length; i++) {
-            items += "\"" + iterable[i] + "\""
-            if (i < iterable.length - 1) {
-                items += ", "
-            }
-        }
-
-        return items;
-    },
-
-    __it: (iterable, separator) => {
-        items = ""
-        for (i = 0; i < iterable.length; i++) {
-            items += iterable[i]
+            items += decorator + iterable[i] + decorator
             if (i < iterable.length - 1) {
                 items += separator
             }
         }
 
         return items;
+    },
+}
+module.exports = {
+
+    __itInterpolated: (iterable, expression, separator) => {
+        var newIterables = iterable.map(i => utils.interpolate(expression, i))
+        
+        return helper.__it(newIterables, separator, '');
+    },
+
+    __itColon: (iterable) => {
+        return helper.__it(iterable, ', ', '\"');
+    },
+
+    __it: (iterable, separator) => {
+        
+        return helper.__it(iterable, separator, '')
     },
 
     __camelCaseAndCap: (str) => {

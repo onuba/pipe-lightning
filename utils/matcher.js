@@ -1,3 +1,4 @@
+const utils = require('./utils')
 /* 
  # Copyright (C) 2020 Francisco Hernández (github.com/onuba)
  # This file is part of pipe-lightning project <https://github.com/onuba/pipe-lightning>.
@@ -17,16 +18,6 @@
  */
 matcher_helper = {
     
-    // https://stackoverflow.com/questions/29182244/convert-a-string-to-a-template-string
-    interpolate(str, params) {
-
-        const names = Object.keys(params);
-        const vals = Object.values(params);
-        
-        return new Function(...names, `return \`${str}\`;`)(...vals);
-        
-    },
-
     buildInterpolableObject(match) {
 
         let params = {
@@ -61,7 +52,7 @@ matcher = {
         var newStr = str;
 
         let params = matcher_helper.buildInterpolableObject(match);
-        newStr = newStr.replace(match[0], matcher_helper.interpolate(replaceStr, params));
+        newStr = newStr.replace(match[0], utils.interpolate(replaceStr, params));
         
         return newStr;
     },

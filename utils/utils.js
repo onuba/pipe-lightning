@@ -50,7 +50,17 @@ const utils = {
         let str = iterable.join(separator);
 
         return str;
-    }
+    },
+
+    // https://stackoverflow.com/questions/29182244/convert-a-string-to-a-template-string
+    interpolate(str, params) {
+
+        const names = Object.keys(params);
+        const vals = Object.values(params);
+        
+        return new Function(...names, `return \`${str}\`;`)(...vals);
+        
+    },
 }
 
 module.exports = utils;
