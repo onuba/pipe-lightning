@@ -19,7 +19,7 @@ const { Parser } = require('sql-ddl-to-json-schema');
 
 ddl2json = {
 
-    doAction(options) {
+    doAction(options, resolve, reject) {
 
         try {
             const dbType = options.dbType || 'mysql';
@@ -36,10 +36,10 @@ ddl2json = {
                 result.jsonSchema = parser.toJsonSchemaArray(options, compactJsonTablesArray);
             }
 
-            return result;
+            resolve(result);
 
         } catch (err) {
-            throw err;
+            reject(err);
         }
     }
 }

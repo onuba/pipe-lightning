@@ -24,7 +24,7 @@ const parser = {
                 const parser = require(`./parsers/${strategy}.parser`)
                 console.log(`Launching parser ${strategy}...`)
 
-                resolve(parser.doAction(options));
+                parser.doAction(options, resolve, reject);
             } catch (err) {
                 reject(err);
             }

@@ -1,20 +1,14 @@
 [
     {
-        "package": "com.example.dto",
-        "name": "WithBuiderDto",
+        "package": "com.inditex.wms.rbs.teddy4.utils",
+        "name": "MessengerCheckerDto",
         "comment": "This is an example of generate a Java DTO POJO with GOF builder pattern",
         "inmmutable": true,
         "author": "onuba",
         "fields": [
-            "Long id",
-            "Integer field1",
-            "String field2",
-            "Double field3",
-            "Float field4",
-            "Boolean fieldCool",
-            "List<String> list",
-            "Map<String, String> map",
-            "CustomObject obj"
+            "String emulator",
+            "Class<?> verifyClass",
+            "String methodName"
         ]
     }
 ]

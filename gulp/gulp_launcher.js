@@ -24,14 +24,15 @@ const pipe = (...ops) => ops.reduce(_pipe)
 
 /**
  * 
+ * @param {function} done end callback
  */
-function gulpStart(fileMaskIn, fileMaskOut, options, plugins, done) {
+function gulpStart(fileMaskIn, fileMaskOut, context, plugins, done) {
 
     try {
-        const dynamicPipe = pipe(...plugins)
+        dynamicPipe = pipe(...plugins)
 
         gulp.src(fileMaskIn)
-            .pipe(dynamicPipe(options))
+            .pipe(dynamicPipe(context))
             .pipe(gulp.dest(fileMaskOut))
             .on('end', () => {
                 if (done) {
