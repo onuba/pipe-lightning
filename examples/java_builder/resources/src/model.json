@@ -1,14 +1,14 @@
 [
     {
-        "package": "com.inditex.wms.rbs.teddy4.utils",
+        "package": "com.example",
         "name": "MessengerCheckerDto",
         "comment": "This is an example of generate a Java DTO POJO with GOF builder pattern",
         "inmmutable": true,
         "author": "onuba",
         "fields": [
-            "String emulator",
-            "Class<?> verifyClass",
-            "String methodName"
+            "String msg",
+            "Class<?> verifyClass"
+
         ]
     }
 ]

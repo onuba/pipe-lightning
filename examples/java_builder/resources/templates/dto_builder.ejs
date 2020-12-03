@@ -16,7 +16,7 @@ public class <%= data.__cap(data.name) %> {
     private <%- c.type%> <%= data.__uncap(c.name)%>;
 <%}%>
 
-    private <%= data.__cap(data.name)%>(<%- data.__uncap(data.name)%>Builder builder) { 
+    private <%= data.__cap(data.name)%>(<%- data.__cap(data.name)%>Builder builder) { 
 
         <% for (i = 0; i < data.extractedFields.length; i++) {
             var c = data.extractedFields[i];
