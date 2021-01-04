@@ -86,3 +86,17 @@ test('add one 0 to all match', () => {
     expect(newStr).toBeDefined();
     expect(newStr).toBe('lorem ipsum time="1000" ipsum lorem time="10000"')
 });
+
+test('add one 0 to all match with named groups', () => {
+  
+    const str = 'lorem ipsum time="100" ipsum lorem time = "1000"';
+
+    const regex = /time\s*=\s*"(?<time>\d+)"/g
+
+    expect(matcher.hasMatch(str, regex)).toBeTruthy();
+
+    const newStr = matcher.replaceAll(str, regex, 'time="${time}0"')
+    
+    expect(newStr).toBeDefined();
+    expect(newStr).toBe('lorem ipsum time="1000" ipsum lorem time="10000"')
+});
