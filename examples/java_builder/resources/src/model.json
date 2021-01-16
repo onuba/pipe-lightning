@@ -1,20 +1,12 @@
 [
     {
-        "package": "com.example.dto",
-        "name": "WithBuiderDto",
-        "comment": "This is an example of generate a Java DTO POJO with GOF builder pattern",
+        "package": "com.es.package",
+        "name": "PerfilReportDto",
+        "comment": "Modelo para informes",
         "inmmutable": true,
-        "author": "onuba",
+        "author": "aaaa",
         "fields": [
-            "Long id",
-            "Integer field1",
-            "String field2",
-            "Double field3",
-            "Float field4",
-            "Boolean fieldCool",
-            "List<String> list",
-            "Map<String, String> map",
-            "CustomObject obj"
+            "String nombreEmpresa"
         ]
     }
 ]
