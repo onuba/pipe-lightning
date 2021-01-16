@@ -64,14 +64,16 @@ matcher = {
             fullMatch: match[0][0]
         }
 
-        match[0].forEach((part, _index) =>{
+        if (Array.isArray(match[0])) {
+            match[0].forEach((part, _index) =>{
 
-            if (_index > 0) {
-                
-                params[`group_${_index}`] = part;
-            } 
-        })
-
+                if (_index > 0) {
+                    
+                    params[`group_${_index}`] = part;
+                } 
+            })
+        }
+        
         // named groups
         if (match[0].groups) {
 
