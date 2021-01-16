@@ -52,18 +52,18 @@ const parser_helper = {
 
         var ret = false;
 
-        if (condition.validate(jsonObj)) {
+        if (condition.search(jsonObj)) {
             refs[condition.ref] = jsonObj;
 
             var params = {}
-            if (condition.regexp) {
+            if (condition.match_data) {
                 
-                condition.regexp.forEach(regexp => {
-                    var pathValue = _.get(jsonObj, regexp.path_to_apply)
+                condition.match_data.forEach(match_data => {
+                    var pathValue = _.get(jsonObj, match_data.path_to_apply)
                     //console.log(pathValue)
                     //console.log(typeof pathValue)
                     if (pathValue && typeof pathValue === 'string') {
-                        const matchs = matcher.match(pathValue, regexp.exp)
+                        const matchs = matcher.match(pathValue, match_data.exp)
                         //console.log(matcher.buildInterpolableObject(matchs))
                         if (matchs) {
                             utils.addToObject(params, 'values', {}, matcher.buildInterpolableObject(matchs));
@@ -73,7 +73,7 @@ const parser_helper = {
                 })
             }
 
-            ret = condition.func(parserContext, params.values);
+            ret = condition.validate(parserContext, jsonObj, params.values);
         }
 
         //console.log(`verificateNode ${ret}`)
@@ -117,12 +117,13 @@ const parser_helper = {
                     // bypass condition 1
                     if (counter > 1) {
                         if (!parser_helper.traverse(node.parserContext, jsonObj, node.refs, condition, false)) {
-                            if (condition.must) {
-                                allPassed = false
-                            }
                             
                             console.log(`Condition ${counter} NOT pass! This condition is mandatory? ${condition.must}`)
-                            break;
+                            
+                            if (condition.must) {
+                                allPassed = false
+                                break;
+                            }
                         }    
                         console.log(`Condition ${counter} pass!`)
                     }
@@ -131,7 +132,7 @@ const parser_helper = {
 
                 if (allPassed) {
                     //console.log(node.refs)
-                    rule.successfull(node.parserContext, context, node.refs);
+                    rule.successfull(node.parserContext, context, jsonObj, node.refs);
                 }
     
                 console.log(`Rule ${rule.name} verified? ${allPassed}`)

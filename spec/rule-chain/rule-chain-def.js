@@ -5,14 +5,14 @@ module.exports = [
         conditions: [
             {
                 must: true,
-                validate: (data) => data.name === 'sender' && data.attributes.type === 'user_request',
-                regexp: [
+                search: (data) => data.name === 'sender' && data.attributes.type === 'user_request',
+                match_data: [
                     {
                         path_to_apply: 'attributes.content',
                         exp: /user\s+(?<userId>\d+)\s+request\s+operation\s+(?<operationId>\d+)/
                     }
                 ],
-                func: (parserContext, match) => {
+                validate: (parserContext, match) => {
                     parserContext.locating_operation = true
                     parserContext.userId = match['userId']
                     parserContext.operationId = match['operationId']
@@ -22,14 +22,14 @@ module.exports = [
             },
             {
                 must: true,
-                validate: (data) => data.name === 'receiver' && data.attributes.type === 'user_request_receive',
-                regexp: [
+                search: (data) => data.name === 'receiver' && data.attributes.type === 'user_request_receive',
+                match_data: [
                     {
                         path_to_apply: 'attributes.content',
                         exp: /do\s+operation\s+(?<operationId>\d+)\s+for\s+user\s+(?<userId>\d+)/
                     }
                 ],
-                func: (parserContext, match) => {
+                validate: (parserContext, match) => {
                     return parserContext.userId === match['userId'] &&
                         parserContext.operationId === match['operationId']
                 },
@@ -37,14 +37,14 @@ module.exports = [
             },
             {
                 must: true,
-                validate: (data) => data.name === 'sender' && data.attributes.type === 'user_response',
-                regexp: [
+                search: (data) => data.name === 'sender' && data.attributes.type === 'user_response',
+                match_data: [
                     {
                         path_to_apply: 'attributes.content',
                         exp: /do\s+operation\s+(?<operationId>\d+)\s+for\s+user\s+(?<userId>\d+)\s+response\s+(?<response>\w+)/
                     }
                 ],
-                func: (parserContext, match) => {
+                validate: (parserContext, match) => {
                     return parserContext.userId === match['userId'] &&
                         parserContext.operationId === match['operationId'] &&
                         'OK' === match['response']
