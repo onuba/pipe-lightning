@@ -20,15 +20,15 @@ var convert = require('xml-js'),
 
 json2xml = {
 
-    doAction(options) {
+    doAction(options, resolve, reject) {
 
         try {
             const compact = isBoolean(options.compact) ? options.compact : true
             const spaces = options.spaces || 4
 
-            return convert.json2xml(options.data, { compact: compact, spaces: spaces })
+            resolve(convert.json2xml(options.data, { compact: compact, spaces: spaces }))
         } catch (err) {
-            throw err;
+            reject(err);
         }
 
     }

@@ -15,6 +15,7 @@ const pipe_launcher = require('./pipe/pipe.launcher'),
 module.exports = {
 
     pipe_launcher: pipe_launcher,
+    gulp_launcher: gulp_launcher,
     moo_decorator: moo_decorator,
     parser_manager: parser_manager,
     template_manager: template_manager,

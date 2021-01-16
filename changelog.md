@@ -1,3 +1,11 @@
+# v1.0.2 - yyyyMMdd
+## Add
+ - excel 2 json parser added
+ - Se expone gulp launcher
+## Update
+ - parser.manager delegates Promise resolution in adapters.
+## Fix
+
 # v1.0.1 - 20201107
 ## Add
  - Exposes 'template_utils' to the world

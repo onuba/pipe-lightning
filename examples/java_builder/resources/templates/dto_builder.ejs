@@ -16,11 +16,11 @@ public class <%= data.__cap(data.name) %> {
     private <%- c.type%> <%= data.__uncap(c.name)%>;
 <%}%>
 
-    private <%= data.__cap(data.name)%>(<%- data.__it(data.fields, ',\n        ')%>) { 
+    private <%= data.__cap(data.name)%>(<%- data.__cap(data.name)%>Builder builder) { 
 
         <% for (i = 0; i < data.extractedFields.length; i++) {
             var c = data.extractedFields[i];
-        %>this.<%=data.__uncap(c.name)%> = <%=data.__uncap(c.name)%>;
+        %>this.<%=data.__uncap(c.name)%> = builder.<%=data.__uncap(c.name)%>;
         <%}%>
     }
 
@@ -61,7 +61,7 @@ public class <%= data.__cap(data.name) %> {
     <%}%>
 
         public <%= data.__cap(data.name)%> build() {
-            return new <%= data.__cap(data.name)%>(<%=data.__it(data.extractedFields.map(f => f.name), ',\n                ')%>);
+            return new <%= data.__cap(data.name)%>(this);
         }
     }
 }
