@@ -1,7 +1,9 @@
 # v1.0.2 - yyyyMMdd
 ## Add
- - excel 2 json parser added
- - Se expone gulp launcher
+ - Excel 2 json parser added
+ - Gulp Launcher exposed
+ - Dynamic state machine to identifiy complex patterns over JSON objects.
+ - Matcher is able to interpolate with named groups
 ## Update
  - parser.manager delegates Promise resolution in adapters.
 ## Fix

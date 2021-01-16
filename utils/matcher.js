@@ -18,21 +18,7 @@ const utils = require('./utils')
  */
 matcher_helper = {
     
-    buildInterpolableObject(match) {
-
-        let params = {
-            fullMatch: match[0]
-        }
-
-        match.forEach((part, _index) =>{
-
-            if (_index > 0) {
-                params[`group_${_index}`] = part;
-            } 
-        })
-
-        return params;
-    }
+    
 
 } 
 matcher = {
@@ -51,7 +37,7 @@ matcher = {
 
         var newStr = str;
 
-        let params = matcher_helper.buildInterpolableObject(match);
+        let params = matcher.buildInterpolableObject(match);
         newStr = newStr.replace(match[0], utils.interpolate(replaceStr, params));
         
         return newStr;
@@ -70,6 +56,31 @@ matcher = {
         })
 
         return newStr;
+    },
+
+    buildInterpolableObject(match) {
+
+        let params = {
+            fullMatch: match[0][0]
+        }
+
+        match[0].forEach((part, _index) =>{
+
+            if (_index > 0) {
+                
+                params[`group_${_index}`] = part;
+            } 
+        })
+
+        // named groups
+        if (match[0].groups) {
+
+            Object.keys(match[0].groups).forEach(key => {
+                params[key] = match[0].groups[key]
+            })
+        }
+        
+        return params;
     }
 }
 

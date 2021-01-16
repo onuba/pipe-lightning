@@ -1,0 +1,88 @@
+{
+    "elements": [
+        {
+            "type": "element",
+            "name": "root",
+            "elements": [
+                {
+                    "type": "element",
+                    "comment": "this is a comment",
+                    "name": "comment"
+                },
+                {
+                    "type": "element",
+                    "name": "prepare"
+                },
+                {
+                    "type": "element",
+                    "name": "main",
+                    "elements": [
+                        {
+                            "type": "element",
+                            "name": "sender",
+                            "attributes": {
+                                "from": "web",
+                                "type": "user_request",
+                                "content": "user 1 request operation 1"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "sender",
+                            "attributes": {
+                                "from": "web",
+                                "type": "user_request",
+                                "content": "user 1 request operation 2"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "sender",
+                            "attributes": {
+                                "from": "web",
+                                "type": "user_request",
+                                "content": "user 2 request operation 3"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "receiver",
+                            "attributes": {
+                                "from": "host",
+                                "type": "user_request_receive",
+                                "content": "do operation 1 for user 1"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "receiver",
+                            "attributes": {
+                                "from": "host",
+                                "type": "user_request_receive",
+                                "content": "do operation 2 for user 1"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "sender",
+                            "attributes": {
+                                "from": "host",
+                                "type": "user_response",
+                                "content": "do operation 2 for user 1 response OK"
+                            }
+                        },
+                        {
+                            "type": "element",
+                            "name": "sender",
+                            "attributes": {
+                                "from": "host",
+                                "type": "user_response",
+                                "content": "do operation 1 for user 1 response KO"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
