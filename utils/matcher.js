@@ -15,12 +15,7 @@ const utils = require('./utils')
  #
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
- */
-matcher_helper = {
-    
-    
-
-} 
+ */ 
 matcher = {
     
     match(str, regex) {
