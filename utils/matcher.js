@@ -63,7 +63,7 @@ matcher = {
     buildInterpolableObject(match) {
 
         internMatch = match
-        if (Array.isArray(internMatch[0]) && Array.isArray(internMatch[0][0])) {
+        if (Array.isArray(internMatch) && Array.isArray(internMatch[0])) {
             internMatch = internMatch[0]
         }
         let params = {
