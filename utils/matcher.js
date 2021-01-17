@@ -53,27 +53,30 @@ matcher = {
         return newStr;
     },
 
+    /**
+     * Single match of array matches interpolable Object.
+     * 
+     * @param {Array} match 
+     */
     buildInterpolableObject(match) {
 
         let params = {
-            fullMatch: match[0][0]
+            fullMatch: match[0]
         }
 
-        if (Array.isArray(match[0])) {
-            match[0].forEach((part, _index) =>{
+        match.forEach((part, _index) =>{
 
-                if (_index > 0) {
-                    
-                    params[`group_${_index}`] = part;
-                } 
-            })
-        }
+            if (_index > 0) {
+                
+                params[`group_${_index}`] = part;
+            } 
+        })
         
         // named groups
-        if (match[0].groups) {
+        if (match.groups) {
 
-            Object.keys(match[0].groups).forEach(key => {
-                params[key] = match[0].groups[key]
+            Object.keys(match.groups).forEach(key => {
+                params[key] = match.groups[key]
             })
         }
         

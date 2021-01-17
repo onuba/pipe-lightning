@@ -61,6 +61,57 @@ const utils = {
         return new Function(...names, `return \`${str}\`;`)(...vals);
         
     },
+
+    /**
+     * Split with rejoin capacity.
+     * 
+     * @param {string} str String to split 
+     * @param {string} delimiter Delimiter for split
+     * @param {string} rejoin Rejoin parts that have this string in open/close way, for example, if you split a string
+     * by semicolon and contains literals ('literal') that can have delimitier string inside, rejoin this part
+     */
+    split(str, delimiter, rejoin) {
+
+        if (!str) {
+            return []
+        }
+
+        if (!delimiter) {
+            return [str]
+        }
+
+        var parts = str.split(delimiter);
+
+        var realParts = []
+        buffer = ''
+        joining = false
+        parts.forEach(p => {
+
+            if (rejoin) {
+
+                count = (p.match(new RegExp(rejoin, 'g')) || []).length
+                if (!joining && count === 0 || count === 2) {
+                    realParts.push(p)
+                } else if (!joining && count === 1) {
+                    joining = true
+                    buffer += p
+                    buffer += delimiter
+                } else if (joining && count === 1) {
+                    buffer += p
+                    joining = false
+                    realParts.push(buffer)
+                    buffer = ''
+                } else if (joining && count === 0) {
+                    buffer += p
+                    buffer += delimiter
+                }
+            } else {
+                realParts.push(p)
+            } 
+        })
+
+        return realParts;
+    }
 }
 
 module.exports = utils;

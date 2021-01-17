@@ -239,3 +239,92 @@ test('listAsStrWithSeparator separator as ; whitouth last ', () => {
     expect(str).toBeDefined();
     expect(str).toBe('a;b');
 });
+
+// ---------------------- split
+
+test('split all null', () => {
+
+    const parts = utils.split(undefined, undefined, undefined)
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(0);
+});
+
+test('split delimiter and rejoin null', () => {
+
+    const parts = utils.split('', undefined, undefined)
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(0);
+});
+
+test('split rejoin null', () => {
+
+    const parts = utils.split('', '', undefined)
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(0);
+});
+
+test('split all empty', () => {
+
+    const parts = utils.split('', '', '')
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(0);
+});
+
+test('split delimiter and rejoin empty', () => {
+
+    str = "this is a test, 'a good, or valid, test', let´s see"
+    const parts = utils.split(str, '', '')
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(1);
+    expect(parts[0]).toBe(str);
+});
+
+test('split delimiter not exists', () => {
+
+    str = "this is a test, 'a good, or valid, test', let´s see"
+    const parts = utils.split(str, '<', '')
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(1);
+    expect(parts[0]).toBe(str);
+});
+
+test('split delimiter exists, not rejoin', () => {
+
+    str = "this is a test, 'a good, or valid, test', let´s see"
+    const parts = utils.split(str, ',', '')
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(5);
+    expect(parts[0]).toBe('this is a test');
+    expect(parts[1]).toBe(" 'a good");
+    expect(parts[2]).toBe(' or valid');
+    expect(parts[3]).toBe(" test'");
+    expect(parts[4]).toBe(" let´s see");
+});
+
+test('split delimiter exists and rejoin', () => {
+
+    str = "this is a test, 'a good, or valid, test', let´s see"
+    const parts = utils.split(str, ',', "'")
+
+    console.log(parts)
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(3);
+    expect(parts[0]).toBe('this is a test');
+    expect(parts[1]).toBe(" 'a good, or valid, test'");
+    expect(parts[2]).toBe(" let´s see");
+});
