@@ -4,6 +4,8 @@
  - Gulp Launcher exposed
  - Dynamic state machine to identifiy complex patterns over JSON objects.
  - Matcher is able to interpolate with named groups
+ - Matcher buildInterpolableObject only interpolate first object is the argument is an array of matches
+ - Utils can split with rejoin
 ## Update
  - parser.manager delegates Promise resolution in adapters.
 ## Fix

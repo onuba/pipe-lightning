@@ -56,15 +56,21 @@ matcher = {
     /**
      * Single match of array matches interpolable Object.
      * 
-     * @param {Array} match 
+     * @param {Array} match If the passed object is a match of matches, the first one
+     * will be interopelable. You must call in a forEach way to get all matches of
+     * an array of matches
      */
     buildInterpolableObject(match) {
 
+        internMatch = match
+        if (Array.isArray(internMatch[0]) && Array.isArray(internMatch[0][0])) {
+            internMatch = internMatch[0]
+        }
         let params = {
-            fullMatch: match[0]
+            fullMatch: internMatch[0]
         }
 
-        match.forEach((part, _index) =>{
+        internMatch.forEach((part, _index) =>{
 
             if (_index > 0) {
                 
@@ -73,10 +79,10 @@ matcher = {
         })
         
         // named groups
-        if (match.groups) {
+        if (internMatch.groups) {
 
-            Object.keys(match.groups).forEach(key => {
-                params[key] = match.groups[key]
+            Object.keys(internMatch.groups).forEach(key => {
+                params[key] = internMatch.groups[key]
             })
         }
         
