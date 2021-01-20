@@ -52,7 +52,7 @@ const parser_helper = {
 
         var ret = false;
 
-        if (condition.search(jsonObj)) {
+        if (jsonObj && condition.search(jsonObj)) {
             refs[condition.ref] = jsonObj;
 
             var params = {}
