@@ -90,7 +90,7 @@ const utils = {
             if (rejoin) {
 
                 count = (p.match(new RegExp(rejoin, 'g')) || []).length
-                if (!joining && count === 0 || count === 2) {
+                if (!joining && count === 0 || count === 2 || count > 2) {
                     realParts.push(p)
                 } else if (!joining && count === 1) {
                     joining = true

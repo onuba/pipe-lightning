@@ -320,11 +320,64 @@ test('split delimiter exists and rejoin', () => {
     str = "this is a test, 'a good, or valid, test', let´s see"
     const parts = utils.split(str, ',', "'")
 
-    console.log(parts)
     expect(parts).toBeDefined();
     expect(parts).toBeInstanceOf(Array);
     expect(parts.length).toBe(3);
     expect(parts[0]).toBe('this is a test');
     expect(parts[1]).toBe(" 'a good, or valid, test'");
     expect(parts[2]).toBe(" let´s see");
+});
+
+test('split delimiter exists and rejoin insert expression', () => {
+
+    str = "('www.dominio.com', 'Consultors', 'https://dominio.com/pdp/', 'Consultoria', NULL, NULL, NULL, NULL, NULL, NULL, 'Web corporativa l''empresa informatiu', 0, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', '', '', 0, 0, 'info@email.com'),"
+    const parts = utils.split(str, ',', "'")
+
+    expect(parts).toBeDefined();
+    expect(parts).toBeInstanceOf(Array);
+    expect(parts.length).toBe(44);
+    expect(parts[0]).toBe("('www.dominio.com'");
+    expect(parts[1]).toBe(" 'Consultors'");
+    expect(parts[2]).toBe(" 'https://dominio.com/pdp/'");
+    expect(parts[3]).toBe(" 'Consultoria'")
+    expect(parts[4]).toBe(" NULL")
+    expect(parts[5]).toBe(" NULL")
+    expect(parts[6]).toBe(" NULL")
+    expect(parts[7]).toBe(" NULL")
+    expect(parts[8]).toBe(" NULL")
+    expect(parts[9]).toBe(" NULL")
+    expect(parts[10]).toBe(" 'Web corporativa l''empresa informatiu'")
+    expect(parts[11]).toBe(" 0")
+    expect(parts[12]).toBe(" NULL")
+    expect(parts[13]).toBe(" NULL")
+    expect(parts[14]).toBe(" NULL")
+    expect(parts[15]).toBe(" NULL")
+    expect(parts[16]).toBe(" NULL")
+    expect(parts[17]).toBe(" 0")
+    expect(parts[18]).toBe(" ''")
+    expect(parts[19]).toBe(" 0")
+    expect(parts[20]).toBe(" 0")
+    expect(parts[21]).toBe(" 0")
+    expect(parts[22]).toBe(" 0")
+    expect(parts[23]).toBe(" 0")
+    expect(parts[24]).toBe(" 0")
+    expect(parts[25]).toBe(" 0")
+    expect(parts[26]).toBe(" 0")
+    expect(parts[27]).toBe(" 0")
+    expect(parts[28]).toBe(" 1")
+    expect(parts[29]).toBe(" NULL")
+    expect(parts[30]).toBe(" NULL")
+    expect(parts[31]).toBe(" NULL")
+    expect(parts[32]).toBe(" NULL")
+    expect(parts[33]).toBe(" NULL")
+    expect(parts[34]).toBe(" 0")
+    expect(parts[35]).toBe(" 0")
+    expect(parts[36]).toBe(" 0")
+    expect(parts[37]).toBe(" ''")
+    expect(parts[38]).toBe(" ''")
+    expect(parts[39]).toBe(" ''")
+    expect(parts[40]).toBe(" 0")
+    expect(parts[41]).toBe(" 0")
+    expect(parts[42]).toBe(" 'info@email.com')")
+    expect(parts[43]).toBe("")
 });
