@@ -8,6 +8,7 @@
  - Utils can split with rejoin
 ## Update
  - parser.manager delegates Promise resolution in adapters.
+ - Gulp launcher recibe src options for use stream mode
 ## Fix
 
 # v1.0.1 - 20201107
