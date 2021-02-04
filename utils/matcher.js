@@ -87,9 +87,8 @@ matcher = {
     /**
      * Single match of array matches interpolable Object.
      * 
-     * @param {Array} match If the passed object is a match of matches, the first one
-     * will be interopelable. You must call in a forEach way to get all matches of
-     * an array of matches
+     * @param {Array} match If the passed object is a match of matches, an array
+     * of interpolateObjects will be return. An Object in other case.
      */
     buildInterpolableObject(match) {
 
@@ -107,7 +106,7 @@ matcher = {
             interopObj = {}
         }
 
-        console.log(internMatch)
+        //console.log(internMatch)
         if (Array.isArray(interopObj)) {
 
             internMatch.forEach(m => {
