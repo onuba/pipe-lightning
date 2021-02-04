@@ -1,12 +1,15 @@
 [
     {
-        "package": "com.es.package",
-        "name": "PerfilReportDto",
-        "comment": "Modelo para informes",
+        "package": "com.inditex.wms.rbs.teddy4.dto",
+        "name": "ValidateWorkOrderDto",
+        "comment": "Validate WorkOrder DTO",
         "inmmutable": true,
-        "author": "aaaa",
+        "author": "fhernandezs",
         "fields": [
-            "String nombreEmpresa"
+            "Long workOrderId",
+            "Integer waveId",
+            "ContainerDimensionsType containerDimensionsType",
+            "SelectabledUnificationLevel minUnificationLevel"
         ]
     }
 ]
