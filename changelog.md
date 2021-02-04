@@ -9,6 +9,7 @@
 ## Update
  - parser.manager delegates Promise resolution in adapters.
  - Gulp launcher recibe src options for use stream mode
+ - Rule Manager pass an array of interoperable match objects if there are more than one match
 ## Fix
 
 # v1.0.1 - 20201107

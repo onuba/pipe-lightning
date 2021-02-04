@@ -16,6 +16,37 @@ const utils = require('./utils')
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
  */ 
+
+const helper_matcher = {
+
+    _extract_match_info(m) {
+
+        let params = {
+            fullMatch: m[0]
+        }
+
+        console.log(m)
+
+        m.forEach((part, _index) =>{
+
+            if (_index > 0) {
+                
+                params[`group_${_index}`] = part;
+            } 
+        })
+        
+        // named groups
+        if (m.groups) {
+
+            Object.keys(m.groups).forEach(key => {
+                params[key] = m.groups[key]
+            })
+        }
+        
+        return params;
+    }
+}
+
 matcher = {
     
     match(str, regex) {
@@ -62,31 +93,31 @@ matcher = {
      */
     buildInterpolableObject(match) {
 
-        internMatch = match
+        var internMatch = match
+        var interopObj;
+
         if (Array.isArray(internMatch) && Array.isArray(internMatch[0])) {
-            internMatch = internMatch[0]
+            if (internMatch.length > 1) {
+                interopObj = []
+            } else {
+                internMatch = internMatch[0]
+                interopObj = {}
+            }            
+        } else {
+            interopObj = {}
         }
-        let params = {
-            fullMatch: internMatch[0]
-        }
 
-        internMatch.forEach((part, _index) =>{
+        console.log(internMatch)
+        if (Array.isArray(interopObj)) {
 
-            if (_index > 0) {
-                
-                params[`group_${_index}`] = part;
-            } 
-        })
-        
-        // named groups
-        if (internMatch.groups) {
-
-            Object.keys(internMatch.groups).forEach(key => {
-                params[key] = internMatch.groups[key]
+            internMatch.forEach(m => {
+                interopObj.push(helper_matcher._extract_match_info(m))
             })
+        } else {
+            interopObj = helper_matcher._extract_match_info(internMatch)
         }
         
-        return params;
+        return interopObj;
     }
 }
 
