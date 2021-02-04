@@ -64,15 +64,16 @@ const parser_helper = {
                     //console.log(typeof pathValue)
                     if (pathValue && typeof pathValue === 'string') {
                         const matchs = matcher.match(pathValue, match_data.exp)
-                        //console.log(matcher.buildInterpolableObject(matchs))
                         if (matchs) {
-                            utils.addToObject(params, 'values', {}, matcher.buildInterpolableObject(matchs));
+                            //console.log(matcher.buildInterpolableObject(matchs))                            
+                            params.values = matcher.buildInterpolableObject(matchs)
                             //console.log(params)
                         }
                     }
                 })
             }
 
+            //console.log(params.values)
             ret = condition.validate(parserContext, jsonObj, params.values);
         }
 
