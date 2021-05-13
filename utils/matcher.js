@@ -15,26 +15,38 @@ const utils = require('./utils')
  #
  # You should have received a copy of the GNU General Public License
  # along with pipe-lightning. If not, see <http://www.gnu.org/licenses/>.
- */
-matcher_helper = {
-    
-    buildInterpolableObject(match) {
+ */ 
+
+const helper_matcher = {
+
+    _extract_match_info(m) {
 
         let params = {
-            fullMatch: match[0]
+            fullMatch: m[0]
         }
 
-        match.forEach((part, _index) =>{
+        //console.log(m)
+
+        m.forEach((part, _index) =>{
 
             if (_index > 0) {
+                
                 params[`group_${_index}`] = part;
             } 
         })
+        
+        // named groups
+        if (m.groups) {
 
+            Object.keys(m.groups).forEach(key => {
+                params[key] = m.groups[key]
+            })
+        }
+        
         return params;
     }
+}
 
-} 
 matcher = {
     
     match(str, regex) {
@@ -51,7 +63,7 @@ matcher = {
 
         var newStr = str;
 
-        let params = matcher_helper.buildInterpolableObject(match);
+        let params = matcher.buildInterpolableObject(match);
         newStr = newStr.replace(match[0], utils.interpolate(replaceStr, params));
         
         return newStr;
@@ -70,6 +82,41 @@ matcher = {
         })
 
         return newStr;
+    },
+
+    /**
+     * Single match of array matches interpolable Object.
+     * 
+     * @param {Array} match If the passed object is a match of matches, an array
+     * of interpolateObjects will be return. An Object in other case.
+     */
+    buildInterpolableObject(match) {
+
+        var internMatch = match
+        var interopObj;
+
+        if (Array.isArray(internMatch) && Array.isArray(internMatch[0])) {
+            if (internMatch.length > 1) {
+                interopObj = []
+            } else {
+                internMatch = internMatch[0]
+                interopObj = {}
+            }            
+        } else {
+            interopObj = {}
+        }
+
+        //console.log(internMatch)
+        if (Array.isArray(interopObj)) {
+
+            internMatch.forEach(m => {
+                interopObj.push(helper_matcher._extract_match_info(m))
+            })
+        } else {
+            interopObj = helper_matcher._extract_match_info(internMatch)
+        }
+        
+        return interopObj;
     }
 }
 

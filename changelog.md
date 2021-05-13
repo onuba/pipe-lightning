@@ -1,9 +1,15 @@
 # v1.0.2 - yyyyMMdd
 ## Add
- - excel 2 json parser added
- - Se expone gulp launcher
+ - Excel 2 json parser added
+ - Gulp Launcher exposed
+ - Dynamic state machine to identifiy complex patterns over JSON objects.
+ - Matcher is able to interpolate with named groups
+ - Matcher buildInterpolableObject only interpolate first object is the argument is an array of matches
+ - Utils can split with rejoin
 ## Update
  - parser.manager delegates Promise resolution in adapters.
+ - Gulp launcher recibe src options for use stream mode
+ - Rule Manager pass an array of interoperable match objects if there are more than one match
 ## Fix
 
 # v1.0.1 - 20201107

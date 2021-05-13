@@ -86,3 +86,65 @@ test('add one 0 to all match', () => {
     expect(newStr).toBeDefined();
     expect(newStr).toBe('lorem ipsum time="1000" ipsum lorem time="10000"')
 });
+
+test('add one 0 to all match with named groups', () => {
+  
+    const str = 'lorem ipsum time="100" ipsum lorem time = "1000"';
+
+    const regex = /time\s*=\s*"(?<time>\d+)"/g
+
+    expect(matcher.hasMatch(str, regex)).toBeTruthy();
+
+    const newStr = matcher.replaceAll(str, regex, 'time="${time}0"')
+    
+    expect(newStr).toBeDefined();
+    expect(newStr).toBe('lorem ipsum time="1000" ipsum lorem time="10000"')
+});
+
+test('test one match in buildInteroperableObject', () => {
+  
+    const str = '1 2';
+
+    const regex = /(?<number>\d+)/
+
+    expect(matcher.hasMatch(str, regex)).toBeTruthy();
+    match = matcher.match(str, regex)
+    expect(match).toBeDefined();
+
+    expect(match).toBeInstanceOf(Array);
+    expect(match.length).toBe(1);
+    expect(match[0]).toBeInstanceOf(Array);
+
+    interopMatch = matcher.buildInterpolableObject(match)
+
+    expect(interopMatch).toBeDefined();
+    expect(interopMatch).toBeInstanceOf(Object);
+    expect(interopMatch.number).toBe('1')
+    
+    
+});
+test('test more than one match in buildInteroperableObject', () => {
+  
+    const str = '1 2';
+
+    const regex = /(?<number>\d+)/g
+
+    expect(matcher.hasMatch(str, regex)).toBeTruthy();
+    match = matcher.match(str, regex)
+    expect(match).toBeDefined();
+
+    expect(match).toBeInstanceOf(Array);
+    expect(match.length).toBe(2);
+    expect(match[0]).toBeInstanceOf(Array);
+    expect(match[1]).toBeInstanceOf(Array);
+
+    interopMatch = matcher.buildInterpolableObject(match)
+
+    expect(interopMatch).toBeDefined();
+    expect(interopMatch).toBeInstanceOf(Array);
+    expect(interopMatch.length).toBe(2)
+    expect(interopMatch[0].number).toBe('1')
+    expect(interopMatch[1].number).toBe('2')
+    
+    
+});

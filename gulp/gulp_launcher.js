@@ -31,7 +31,7 @@ function gulpStart(fileMaskIn, fileMaskOut, context, plugins, done) {
     try {
         dynamicPipe = pipe(...plugins)
 
-        gulp.src(fileMaskIn)
+        gulp.src(fileMaskIn, context.gulp_options ? context.gulp_options : {})
             .pipe(dynamicPipe(context))
             .pipe(gulp.dest(fileMaskOut))
             .on('end', () => {

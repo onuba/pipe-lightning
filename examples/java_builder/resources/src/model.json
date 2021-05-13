@@ -1,14 +1,15 @@
 [
     {
-        "package": "com.example",
-        "name": "MessengerCheckerDto",
-        "comment": "This is an example of generate a Java DTO POJO with GOF builder pattern",
+        "package": "com.inditex.wms.rbs.teddy4.dto",
+        "name": "ValidateWorkOrderDto",
+        "comment": "Validate WorkOrder DTO",
         "inmmutable": true,
-        "author": "onuba",
+        "author": "fhernandezs",
         "fields": [
-            "String msg",
-            "Class<?> verifyClass"
-
+            "Long workOrderId",
+            "Integer waveId",
+            "ContainerDimensionsType containerDimensionsType",
+            "SelectabledUnificationLevel minUnificationLevel"
         ]
     }
 ]
