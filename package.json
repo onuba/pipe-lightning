@@ -20,6 +20,6 @@
   "author": "https://github.com/onuba <fhsuarez@gmail.com>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "jest": "^25.2.6"
+    "jest": "^29.5.0"
   }
 }
